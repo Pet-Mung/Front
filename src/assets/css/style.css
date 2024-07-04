@@ -1,0 +1,217 @@
+@charset "UTF-8";
+
+:root {
+  --bs-body-bg: #f8f7fa;
+  --bs-aside-menu-bg: #2f3349;
+  --primary-color: #7367f0;
+  --primary-color-on: #6257df;
+  --secondary-color: #f1f1f2;
+  --secondary-color-on: #c3c3cc;
+  --btn-primary-bgcolor: #7367f0;
+  --btn-gray-bgcolor: #b0b0b1;
+  --txt-default-color: #000000;
+  --txt-plus-color: #12b25d;
+  --txt-minus-color: #ef3a66;
+  --txt-zero-color: #333333;
+  --txt-gray-color: #808183;
+  --topmenu-active-color: #878e98;
+  --topmenu-gray-color: #878e98;
+  --bg-plus-color: #118f4c;
+  --bg-minus-color: #b73e5b;
+  --bg-zero-color: #999b9e;
+  --bs-form-invalid-color: #ea5455;
+  --border-bottom-gray-color: #e8e8e8;
+  --bs-body-font-family: "Noto Sans KR", sans-serif;
+  --bs-en-font-abel-family: "Abel", sans-serif;
+  --bs-en-font-oxygen-family: "Oxygen", sans-serif;
+  --bs-body-color: #6f6b7d;
+  --bs-border-color: #dbdade;
+  --bg-modal-color: #fff;
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+  body {
+    width: 100%;
+    height: 100%;
+    padding-top: env(safe-area-inset-top);
+    font-family: var(--bs-body-font-family);
+    line-height: 1.4;
+    font-size: 16px;
+    color: var(--txt-default-color);
+    background-color: var(--main-bgcolor);
+  }
+  * {
+    font-family: var(--bs-body-font-family);
+    letter-spacing: -0.3px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+  /*스크롤바숨기기*/
+* {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+  /*클릭시 파란박스 숨기기*/
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /*common*/
+  hr {
+    height: 1px;
+    margin: 20px 0;
+    background: #e8e8e8;
+    border: 0;
+  }
+  i {
+    font-style: normal;
+  }
+  .txtlink {
+    color: var(--primary-color) !important;
+  }
+  /* Form ------------------------------------------------------*/
+
+/* select {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px 0 10px;
+    font-size: 100%;
+    background: #e7e7e8 url("../images/icon_select_down2.png") no-repeat right
+      10px center;
+    background-size: 11px;
+    border: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+  }
+  select:focus {
+    transition: all 0.5s ease;
+  }
+  input {
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    padding: 0;
+    font-size: 100%;
+    font-weight: 400;
+    outline: none;
+    border: 0;
+  }
+  input::placeholder {
+    color: #ddd;
+  }
+  input:disabled {
+    color: #777;
+    background: #f3f3f3 !important;
+    -webkit-text-fill-color: #1d1c1c;
+    opacity: 1;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="date"],
+  input[type="week"],
+  input[type="month"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="search"] {
+    height: 40px;
+    line-height: 40px;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 6px;
+  }
+  input[type="file"] {
+    display: block;
+    font-size: 14px;
+    color: #999;
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="number"]:focus,
+  input[type="tel"]:focus,
+  input[type="email"]:focus,
+  input[type="date"]:focus,
+  input[type="week"]:focus,
+  input[type="month"]:focus,
+  input[type="time"]:focus,
+  input[type="file"]:focus,
+  input[type="search"]:focus {
+    border: solid 1px var(--btn-primary-bgcolor);
+  }
+  textarea:focus {
+    outline: none;
+    border: solid 1px var(--btn-primary-bgcolor);
+  }
+  
+  input[type="checkbox"] {
+    display: none;
+  }
+  input[type="checkbox"] + label {
+    font-size: 14px;
+    display: inline-block;
+    padding-left: 28px;
+    line-height: 24px;
+    background: url("../images/icon_check_off.png") 0 center no-repeat;
+    background-size: 20px 20px;
+    cursor: pointer;
+  }
+  input[type="checkbox"]:checked + label {
+    background-image: url("../images/icon_check_on.png");
+  }
+  input[type="checkbox"]:disabled + label {
+    background-image: url("../images/icon_check_disabled.png");
+    opacity: 0.5;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  input[type="radio"] + label {
+    font-size: 14px;
+    display: inline-block;
+    padding-left: 32px;
+    line-height: 20px;
+    background: url("../images/icon_radio_off.png") 0 center no-repeat;
+    background-size: 20px 20px;
+    cursor: pointer;
+  }
+  input[type="radio"]:checked + label {
+    background-image: url("../images/icon_radio_on.png");
+  }
+  input[type="radio"]:disabled + label {
+    background-image: url("../images/icon_radio_disabled.png");
+    opacity: 0.5;
+  } */
+  .main_wrap{
+    padding-top:210px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .layout_wrapper {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bs-body-bg);
+    overflow: auto;
+  }
+  /* icon */
+  .sm_icon{
+    width:18px;
+    margin-right:5px;
+  } 
