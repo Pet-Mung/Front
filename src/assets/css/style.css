@@ -200,11 +200,11 @@ html {
     padding-top:210px;
     width: 90%;
     max-width: 1200px;
+    height: 200vh;
     margin: 0 auto;
   }
   .layout_wrapper {
-    display: flex;
-    align-items: stretch;
+    position: relative;
     width: 100%;
     min-height: 100vh;
     background-color: var(--bs-body-bg);
