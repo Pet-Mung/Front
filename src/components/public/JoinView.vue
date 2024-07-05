@@ -1,7 +1,7 @@
 <template>
-  <div class="join_wrap">
+  <div class="user_wrap">
     <!-- email -->
-    <div class="join_input">
+    <div class="user_input">
       <label for="userEmail">이메일</label>
       <input
         type="text"
@@ -20,7 +20,7 @@
     </div>
     <transition name="fade">
       <!-- name -->
-      <div class="join_input" v-if="isCheck.isEm">
+      <div class="user_input" v-if="isCheck.isEm">
         <label for="userName">이름</label>
         <input
           type="text"
@@ -40,7 +40,7 @@
     </transition>
     <transition name="fade">
       <!-- password -->
-      <div class="join_input" v-if="isCheck.isNm">
+      <div class="user_input" v-if="isCheck.isNm">
         <label for="userPw">비밀번호</label>
         <input
           type="password"
@@ -51,7 +51,7 @@
       </div>
     </transition>
     <transition name="fade">
-      <div class="join_input" v-if="isCheck.isNm">
+      <div class="user_input" v-if="isCheck.isNm">
         <label for="userPwChk">비밀번호 확인</label>
         <input
           type="password"
@@ -108,8 +108,8 @@ onMounted(() => {});
 
 const createUser = async (info) => {
   try {
-    const response = await api.joinUser(info);
-    if (response.status === "201") {
+    const result = await api.joinUser(info);
+    if (result.status === "201") {
       alert("회원가입에 성공했습니다.");
       router.push("/main");
     }
@@ -119,8 +119,7 @@ const createUser = async (info) => {
 };
 const getUsersInfo = async () => {
   try {
-    const response = await api.getUsers();
-    let result = response.data;
+    const result = await api.getUsers();
     console.log(result);
   } catch (error) {
     console.error(error);

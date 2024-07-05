@@ -15,7 +15,9 @@
         <li>
           <router-link to="/join">회원가입</router-link>
         </li>
-        <li>로그인</li>
+        <li>
+          <router-link to="/login">로그인</router-link>
+        </li>
         <li>
           <router-link to="/"
             ><img
