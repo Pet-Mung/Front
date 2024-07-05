@@ -17,7 +17,7 @@ const joinUser = async (info)=>{
 // 로그인 api 호출
 const loginUser = async (info)=>{
     try{
-        const response = await API.get(`user/login`,info);
+        const response = await API.post(`user/login`,info);
         return response.data;
     } catch (error){
         console.error(error);

@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 :root {
-  --primary-color: #f5c17d;
+  --primary-color: #f8ab37;
   --primary-color-on: #f1d78c;
-  --btn-primary-bgcolor: #f5c17d;
+  --btn-primary-bgcolor: #f8ab37;
 
   --bs-body-bg: #f8f7fa;
   --bs-aside-menu-bg: #2f3349;
@@ -81,6 +81,7 @@ html {
     width: 80px;
     height: 40px;
     font-size: 1em;
+    color:#fff;
   }
   .txt-plus{
     color : var(--txt-plus-color);
