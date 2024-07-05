@@ -198,13 +198,13 @@ html {
   } */
   .main_wrap{
     padding-top:210px;
-    width: 90%;
-    max-width: 1200px;
+    /* width: 90%;
+    max-width: 1200px; */
+    height: 100%;
     margin: 0 auto;
   }
   .layout_wrapper {
-    display: flex;
-    align-items: stretch;
+    position: relative;
     width: 100%;
     min-height: 100vh;
     background-color: var(--bs-body-bg);

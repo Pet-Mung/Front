@@ -4,10 +4,13 @@ import { API } from "./apiAuth";
 // 회원가입 api 호출
 const joinUser = async (info)=>{
     try{
-        const response = await API.get(`user/create`,info);
+        const response = await API.post(`user/create`,info);
         return response.data;
     } catch (error){
-        console.error(error);
+        console.log(error.response);
+        if(error.response.status === 409){
+            alert(error.response.data.detail)
+        }
     }
 }
 
