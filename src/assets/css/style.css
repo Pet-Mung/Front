@@ -198,8 +198,8 @@ html {
   } */
   .main_wrap{
     padding-top:210px;
-    width: 90%;
-    max-width: 1200px;
+    /* width: 90%;
+    max-width: 1200px; */
     height: 100%;
     margin: 0 auto;
   }

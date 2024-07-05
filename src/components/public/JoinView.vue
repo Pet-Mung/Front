@@ -17,6 +17,8 @@
             <label for="userPwChk">비밀번호 확인</label>
             <input type="password" @keyup="pwdCheck" id="userPwChk" v-model="info.password_check"/>
             <span >{{chkPw ? '비밀번호 일치' : '비밀번호 불일치'}}</span>
+            <p v-if="chkPw">일치</p>
+            <p v-if="!chkPw">불일치</p>
         </div>
     </form>
     <button type="button" @click="joinBtn">버튼</button>
@@ -24,17 +26,17 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, reactive, toRef } from "vue";
 import api from "@/api/userApi.js";
 
-let isInput = false;
-let chkPw = false;
-let info = {
+let isInput = toRef(false);
+let chkPw = toRef(false);
+let info = reactive({
     password: "",
     password_check: "",
     username: "",
     email: "",
-}
+});
 onMounted(() => {
 
 });
