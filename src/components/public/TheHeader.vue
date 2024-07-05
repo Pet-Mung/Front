@@ -12,6 +12,9 @@
         <li>CATEGORY2</li>
       </ul>
       <ul class="nav_bar nv_right">
+        <li>
+          <router-link to="/join">회원가입</router-link>
+        </li>
         <li>로그인</li>
         <li>
           <router-link to="/"
