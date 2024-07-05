@@ -1,7 +1,7 @@
 import { API } from "./apiAuth";
 
 // 상품 정보 전체 조회 api 호출
-const searchAllProduct = async () => {
+const viewAllProduct = async () => {
   try {
     const response = await API.get("product/");
     return response.data;
@@ -11,7 +11,7 @@ const searchAllProduct = async () => {
 };
 
 // 개별 상품 조회 api 호출
-const searchIndividualProduct = async (product_id) => {
+const viewIndividualProduct = async (product_id) => {
   try {
     const response = await API.get(`product/${product_id}`);
     return response.data;
@@ -43,7 +43,7 @@ const editProduct = async (product_id) => {
 // 상품 삭제 api 호출
 const deleteProduct = async (product_id) => {
   try {
-    const response = await API.put(`product/${product_id}`);
+    const response = await API.delete(`product/${product_id}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -51,8 +51,8 @@ const deleteProduct = async (product_id) => {
 };
 
 export default {
-  searchAllProduct,
-  searchIndividualProduct,
+  viewAllProduct,
+  viewIndividualProduct,
   postProduct,
   editProduct,
   deleteProduct,
