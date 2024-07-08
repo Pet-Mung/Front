@@ -17,6 +17,12 @@ import Product from "@/components/shop/ShopProduct.vue";
 import UserDelivery from "@/components/user/UserDelivery.vue";
 import UserMypage from "@/components/user/UserMypage.vue";
 
+// admin
+import AdminDashboard from "@/components/admin/AdminDashboard.vue";
+import ManageOrders from "@/components/admin/ManageOrders.vue";
+import ManageProducts from "@/components/admin/ManageProducts.vue";
+import ManageUsers from "@/components/admin/ManageUsers.vue";
+
 const routes = [
   //처음 페이지 접속시 로딩페이지
   { path: "/", redirect: "/main" },
@@ -60,6 +66,16 @@ const routes = [
     children: [
       { path: "mypage", component: UserMypage },
       { path: "delivery", component: UserDelivery },
+    ],
+  },
+  //관리자 페이지
+  {
+    path: "/admin",
+    component: AdminDashboard,
+    children: [
+      { path: "orders", component: ManageOrders },
+      { path: "products", component: ManageProducts },
+      { path: "users", component: ManageUsers },
     ],
   },
 ];
