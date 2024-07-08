@@ -36,6 +36,10 @@
         </li>
       </ul>
     </footer>
+    <!-- credit section -->
+    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="가축 아이콘">가축 아이콘 제작자: Freepik - Flaticon</a> -->
+    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="맑은 아이콘">맑은 아이콘 제작자: Creatype - Flaticon</a> -->
+    <!-- <a href="https://www.flaticon.com/kr/free-icons/-o" title="편지 o 아이콘">편지 o 아이콘 제작자: IconsBox - Flaticon</a> -->
   </div>
 </template>
 

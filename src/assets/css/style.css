@@ -1,13 +1,14 @@
 @charset "UTF-8";
 
 :root {
+  --primary-color: #f8ab37;
+  --primary-color-on: #f1d78c;
+  --btn-primary-bgcolor: #f8ab37;
+
   --bs-body-bg: #f8f7fa;
   --bs-aside-menu-bg: #2f3349;
-  --primary-color: #7367f0;
-  --primary-color-on: #6257df;
   --secondary-color: #f1f1f2;
   --secondary-color-on: #c3c3cc;
-  --btn-primary-bgcolor: #7367f0;
   --btn-gray-bgcolor: #b0b0b1;
   --txt-default-color: #000000;
   --txt-plus-color: #12b25d;
@@ -74,6 +75,34 @@ html {
   .txtlink {
     color: var(--primary-color) !important;
   }
+  button.confirm_btn {
+    background-color: var(--btn-primary-bgcolor);
+    border-radius: 5px;
+    width: 80px;
+    height: 40px;
+    font-size: 1em;
+    color:#fff;
+  }
+  .txt-plus{
+    color : var(--txt-plus-color);
+  }
+  .txt-minus{
+    color : var(--txt-minus-color);
+  }
+/* transition */
+  .fade-enter-from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  .fade-enter-active{
+    transform: translateY(50px)
+  }
+  .fade-enter-to{
+    opacity: 1;
+    transition: all 0.5s linear;
+    transform: translateY(0)
+  }
+
   /* Form ------------------------------------------------------*/
 
 /* select {
@@ -95,7 +124,8 @@ html {
   }
   select:focus {
     transition: all 0.5s ease;
-  }
+  } */
+
   input {
     appearance: none;
     -webkit-appearance: none;
@@ -132,6 +162,7 @@ html {
     background: #ffffff;
     padding: 10px;
     border-radius: 6px;
+    font-size: 1em;
   }
   input[type="file"] {
     display: block;
@@ -156,8 +187,9 @@ html {
     outline: none;
     border: solid 1px var(--btn-primary-bgcolor);
   }
-  
-  input[type="checkbox"] {
+
+
+  /* input[type="checkbox"] {
     display: none;
   }
   input[type="checkbox"] + label {
@@ -198,10 +230,14 @@ html {
   } */
   .main_wrap{
     padding-top:210px;
-    /* width: 90%;
-    max-width: 1200px; */
+    width: 90%;
+    max-width: 1200px;
     height: 100%;
     margin: 0 auto;
+  }
+  .main_wrap.main_wt{
+    width: auto;
+    max-width: 100%;
   }
   .layout_wrapper {
     position: relative;
@@ -215,3 +251,5 @@ html {
     width:18px;
     margin-right:5px;
   } 
+
+

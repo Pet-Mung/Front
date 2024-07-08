@@ -17,10 +17,16 @@ const joinUser = async (info)=>{
 // 로그인 api 호출
 const loginUser = async (info)=>{
     try{
-        const response = await API.get(`user/login`,info);
+        let curi = `grant_type=${info.grant_type}&username=${info.username}&password=${info.password}&scope=${info.scope}&client_id=${info.client_id}&client_secret=${info.client_secret}`;
+        const response = await API.post(`user/login`,curi);
         return response.data;
     } catch (error){
-        console.error(error);
+        if(error.response.status === 401){
+            alert(error.response.data.detail)
+        } else{
+            console.error(error);
+        }
+
     }
 }
 
