@@ -18,8 +18,12 @@
 </template>
 
 <script setup>
-import api from "@/api/userApi";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+
+const router = useRouter();
+const store = useStore();
 let isCheck = reactive({
     isNotNm : false,
     isNotPw : false,
@@ -32,25 +36,18 @@ let info = reactive({
   client_id : "",
   client_secret : "",
 });
-// [[Target]]: Object
-// client_id: ""
-// client_secret: ""
-// grant_type: ""
-// password: "qwer1234!!"
-// scope: ""
 
-const getLoginUser = async (info) => {
-  try {
-    console.log(info);
-    const result = await api.loginUser(info);
-    console.log(result);
-    // access Token, refresh Token, token_type, username 줌
-    // access Token을 env 파일에 세팅 ?? api 확인하기
-  } catch (error) {
-    console.error(error);
-  }
-};
-const loginCheck = () => {
+const loginSuccess = computed(()=>{
+  return store.state.login.loginSuccess;
+});
+
+if(loginSuccess.value){
+  alert('로그아웃 되셨습니다.');
+  store.commit('login/setLoginStatus',false);
+  localStorage.clear();
+}
+
+const loginCheck = async () => {
     if(info.username === "") {
         alert("아이디를 입력해주세요.");
         isCheck.isNotNm = true;
@@ -59,7 +56,9 @@ const loginCheck = () => {
         isCheck.isNotNm = false;
         isCheck.isNotPw = true;
     } else {
-        getLoginUser(info);
+      await store.dispatch('login/getLoginUser',info);
+      console.log(loginSuccess.value)
+      if(loginSuccess.value) router.push('/main');
     }
 }
 
