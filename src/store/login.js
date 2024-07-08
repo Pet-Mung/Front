@@ -18,11 +18,11 @@ export default {
             try {
               const result = await userApi.loginUser(info);
               if(result.access_token){
-                api.setAuthToken(result.access_token, result.token_type);
-                // localStorage.setItem('userId',result.access_token);
-                // localStorage.setItem('type',result.token_type);
-                // localStorage.setItem('username',result.username);
-                localStorage.user_id('user_idx',result.user_id);
+ 
+                localStorage.setItem('userId',result.access_token);
+                localStorage.setItem('type',result.token_type);
+                localStorage.setItem('username',result.username);
+                localStorage.setItem('user_idx',result.user_id);
                 context.commit('setLoginStatus',true);
 
               }

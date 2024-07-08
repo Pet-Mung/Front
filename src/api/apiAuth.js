@@ -13,7 +13,7 @@ export const API = axios.create({
   console.log(AUTH_TOKEN)
   try {
     API.defaults.headers.common["Authorization"] = AUTH_TOKEN;
-    console.log('aa',API.defaults.headers.common.Authorization);
+    // console.log('aa',API.defaults.headers.common.Authorization);
   } catch(error){
     console.log(error);
   }
