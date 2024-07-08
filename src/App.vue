@@ -1,5 +1,5 @@
 <template>
-  <div class="layout_wrapper">
+  <div class="layout_wrapper" >
     <TheHeader />
     <div :class="mainPath == 'main' ? 'main_wrap main_wt' : 'main_wrap '" >
       <router-view></router-view>
@@ -13,6 +13,7 @@ import "@/assets/css/style.css";
 import "@/assets/css/reset.css";
 import "@/assets/css/header.scss";
 import "@/assets/css/footer.scss";
+import "@/assets/css/modal.scss";
 import "@/assets/css/user.scss";
 
 import TheHeader from "@/components/public/TheHeader.vue";
@@ -26,4 +27,12 @@ const mainPath = computed(() => {
 });
 </script>
 
-<style></style>
+<style>
+#app{
+  overflow: auto;
+}
+#app.hidden{
+  overflow: hidden;
+}
+
+</style>

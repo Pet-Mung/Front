@@ -12,8 +12,9 @@
       <button id="Lbtn" type="button" @click="loginCheck">LOGIN</button>
     </div>
     <div class="caption">
-      <a href="#">Forgot Password?</a>
+      <span @click="openModal">Forgot Password?</span>
     </div>
+    <ComnModal v-if="isModalOpen" modalName ="비밀번호 찾기" modalSize="small" :modalFlag = 1 />
   </div>
 </template>
 
@@ -21,6 +22,7 @@
 import { computed, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import ComnModal from "@/components/modal/comnModal.vue"; 
 
 const router = useRouter();
 const store = useStore();
@@ -39,6 +41,9 @@ let info = reactive({
 
 const loginSuccess = computed(()=>{
   return store.state.login.loginSuccess;
+});
+const isModalOpen = computed(()=>{
+  return store.state.common.isModalOpen;
 });
 
 if(loginSuccess.value){
@@ -62,5 +67,8 @@ const loginCheck = async () => {
     }
 }
 
+const openModal = () => {
+  store.commit('common/setIsModalOpen',true);
+}
 
 </script>
