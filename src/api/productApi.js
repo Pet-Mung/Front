@@ -21,9 +21,13 @@ const viewIndividualProduct = async (product_id) => {
 };
 
 // 상품 등록 api 호출
-const postProduct = async () => {
+const postProduct = async (formData) => {
   try {
-    const response = await API.post("product/");
+    const response = await API.post("product/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -31,9 +35,13 @@ const postProduct = async () => {
 };
 
 // 상품 수정 api 호출
-const editProduct = async (product_id) => {
+const editProduct = async (product_id, formData) => {
   try {
-    const response = await API.put(`product/${product_id}`);
+    const response = await API.put(`product/${product_id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
