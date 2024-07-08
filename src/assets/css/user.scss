@@ -1,4 +1,4 @@
-// 회원가입
+// ******************* 회원가입 *******************
 .user_wrap {
   min-height: 40vh;
   display: flex;
@@ -39,7 +39,7 @@
   }
 }
 
-// 로그인
+// ******************* 로그인 *******************
 .int-area {
   width: 400px;
   position: relative;
@@ -75,7 +75,6 @@
     }
   }
 }
-
 @keyframes warning {
   0% {
     transform: translateX(-8px);
@@ -110,8 +109,13 @@
 .caption {
   margin-top: 20px;
   text-align: center;
-  a {
+  span {
     font-size: 15px;
     color: #999;
+    cursor: pointer;
+    &:hover{
+      color:#211b1d;
+    }
   }
 }
+
