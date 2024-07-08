@@ -5,7 +5,6 @@ export const API = axios.create({
     headers: {
       Accept: "*/*",
     },
-
 });
 
 //api 요청이 있을때마다 header로 token 보내는 함수
@@ -22,4 +21,3 @@ export const API = axios.create({
 export default {
   setAuthToken,
 }
-// withCredentials 
