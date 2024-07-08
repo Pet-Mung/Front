@@ -11,6 +11,7 @@
 <script setup>
 import "@/assets/css/style.css";
 import "@/assets/css/reset.css";
+import "@/assets/css/header.scss";
 import "@/assets/css/footer.scss";
 import "@/assets/css/user.scss";
 
