@@ -21,7 +21,7 @@
     <transition name="fade">
       <!-- name -->
       <div class="user_input" v-if="isCheck.isEm">
-        <label for="userName">이름</label>
+        <label for="userName">아이디</label>
         <input
           type="text"
           id="userName"
@@ -139,9 +139,9 @@ const isEmailCheck = () => {
 const isNameCheck = () => {
   if (isCheck.isEm) {
     if (info.username === "") {
-      alert("이름을 입력해주세요.");
+      alert("아이디를 입력해주세요.");
     } else if (!nameCheck(info.username)) {
-      alert("이름을 확인하세요.");
+      alert("아이디를 확인하세요.");
     } else isCheck.isNm = true;
   }
 };

@@ -20,11 +20,19 @@ import TheHeader from "@/components/public/TheHeader.vue";
 import TheFooter from "@/components/public/TheFooter.vue";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
+import API from "./api/apiAuth";
 
 const route = useRoute();
 const mainPath = computed(() => {
   return route.path.split("/")[1];
 });
+const userId = computed(()=>{
+  return localStorage.getItem('userId');
+});
+const type = computed(()=>{
+  return localStorage.getItem('type');
+});
+API.setAuthToken(userId.value, type.value);
 </script>
 
 <style>
