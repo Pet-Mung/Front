@@ -5,17 +5,21 @@ export const API = axios.create({
     headers: {
       Accept: "*/*",
     },
+
 });
 
-//api 요청 header로 token 보내는 함수
-function setAuthToken(userId,type) {
+//api 요청이 있을때마다 header로 token 보내는 함수
+ function setAuthToken(userId,type) {
+  const AUTH_TOKEN = `${type} ${userId}`;
+  console.log(AUTH_TOKEN)
   try {
-    API.defaults.headers.common["Authorization"] = `${type} ${userId}`;
+    API.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+    console.log('aa',API.defaults.headers.common.Authorization);
   } catch(error){
     console.log(error);
   }
 }
-
 export default {
   setAuthToken,
 }
+// withCredentials 
