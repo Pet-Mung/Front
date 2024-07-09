@@ -48,18 +48,19 @@
 </template>
 
 <script setup>
-import { API } from "@/api/apiAuth";
+// import { API } from "@/api/apiAuth";
 import productApi from "@/api/productApi";
 // import axios from "axios";
 import { ref } from "vue";
 
 const imagePreview = ref(null);
 const selectedFiles = ref([]);
+const imageUrls = ref("");
 
 const productName = ref("");
 const productCategory = ref("");
-const productPrice = ref("");
-const productCount = ref("");
+const productPrice = ref(0);
+const productCount = ref(0);
 const productContent = ref("");
 
 const readInputFile = (e) => {
@@ -67,11 +68,13 @@ const readInputFile = (e) => {
   imagePreview.value.innerHTML = "";
 
   const files = e.target.files;
+
   const fileArr = Array.prototype.slice.call(files);
-  console.log(fileArr);
+  // console.log(fileArr);
 
   selectedFiles.value = fileArr;
-  console.log(selectedFiles.value);
+  imageUrls.value = "";
+  // console.log(selectedFiles.value);
 
   fileArr.forEach((file) => {
     if (!file.type.match("image/.*")) {
@@ -83,39 +86,38 @@ const readInputFile = (e) => {
     reader.onload = (e) => {
       const img = document.createElement("img");
       img.src = e.target.result;
+
       imagePreview.value.appendChild(img);
       // console.log(imagePreview.value.querySelector("img"));
       imagePreview.value.querySelectorAll("img").forEach((element) => {
         element.style.width = "100px";
       });
       // imagePreview.value.querySelectorAll("img").style.width = "100px";
+      // console.log(imageUrls);
+      // imageUrls.value.push(e.target.result);
+      imageUrls.value += e.target.result + ",";
     };
     reader.readAsDataURL(file);
   });
 };
 
 const uploadProduct = async () => {
-  if (selectedFiles.value.length === 0) {
-    alert("업로드할 파일을 선택하세요.");
-    return;
-  }
+  // if (selectedFiles.value.length === 0) {
+  //   alert("업로드할 파일을 선택하세요.");
+  //   return;
+  // }
 
-  const formData = new FormData();
-  formData.append("name", productName.value);
-  formData.append("category", productCategory.value);
-  formData.append("price", productPrice.value);
-  formData.append("count", productCount.value);
-  formData.append("content", productContent.value);
-  selectedFiles.value.forEach((file) => {
-    console.log(file);
-    // formData.append("image", file);
-  });
-
+  const productData = {
+    name: productName.value,
+    category: productCategory.value,
+    price: productPrice.value,
+    count: productCount.value,
+    content: productContent.value,
+    image: imageUrls.value,
+  };
   try {
-    console.log("aa", API.defaults.headers.common.Authorization);
-    const response = await productApi.postProduct(formData);
+    const response = await productApi.postProduct(productData);
     console.log("response", response);
-    alert("상품 등록이 성공적으로 완료되었습니다!");
   } catch (error) {
     console.error("업로드 에러", error);
   }
