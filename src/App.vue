@@ -1,7 +1,7 @@
 <template>
   <div class="layout_wrapper" >
     <TheHeader />
-    <div :class="mainPath == 'main' ? 'main_wrap main_wt' : 'main_wrap '" >
+    <div :class="mainPath == 'main' || subPath == 'mypage' ? 'main_wrap main_wt' : 'main_wrap '" >
       <router-view></router-view>
     </div>
     <TheFooter />
@@ -25,6 +25,9 @@ import API from "./api/apiAuth";
 const route = useRoute();
 const mainPath = computed(() => {
   return route.path.split("/")[1];
+});
+const subPath = computed(() => {
+  return route.path.split("/")[2];
 });
 const userId = computed(()=>{
   return localStorage.getItem('userId');

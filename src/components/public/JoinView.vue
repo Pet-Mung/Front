@@ -117,14 +117,6 @@ const createUser = async (info) => {
     console.error(error);
   }
 };
-const getUsersInfo = async () => {
-  try {
-    const result = await api.getUsers();
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 // 이메일 확인
 const isEmailCheck = () => {
@@ -179,7 +171,6 @@ const joinBtn = () => {
   isNameCheck();
   if (isCheck.isEm && isCheck.isNm && isCheck.isPw) {
     createUser(info);
-    getUsersInfo();
   }
 };
 </script>
