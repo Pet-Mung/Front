@@ -4,6 +4,7 @@
   --primary-color: #f8ab37;
   --primary-color-on: #f1d78c;
   --btn-primary-bgcolor: #f8ab37;
+  --btn-secondary-bgcolor: #2f2a1b;
   
   --bs-body-bg: #f8f7fa;
   --secondary-color: #f1f1f2;
@@ -68,6 +69,14 @@ button.confirm_btn {
   background-color: var(--btn-primary-bgcolor);
   border-radius: 5px;
   width: 80px;
+  height: 40px;
+  font-size: 1em;
+  color: #fff;
+}
+.btn_type_01 {
+  background-color: var(--btn-secondary-bgcolor);
+  border-radius: 5px;
+  width: 100px;
   height: 40px;
   font-size: 1em;
   color: #fff;

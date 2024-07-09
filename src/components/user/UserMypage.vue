@@ -8,25 +8,25 @@
           <h3 class="fc-w ml-5 mr-15 pd-10 fs-30">
             {{ data.user_name }}<span class="fs-15"> 님</span>
           </h3>
-          <button class="pd-10 fs-15 fb bx-shadow">내정보 수정</button>
+          <button class="pd-10 fs-15 fb bx-shadow" @click="router.push('profile')">내정보 수정</button>
         </div>
       </div>
     </div>
     <div class="pd-30">
       <div class="cont_area">
-        <h4>장바구니 <button>더 보기 +</button></h4>
+        <h4>장바구니 <button @click="router.push('basket')">더 보기 +</button></h4>
         <SliderView :sliderData="basketData" />
       </div>
     </div>
     <div class="pd-30 lect_type_02">
       <div class="cont_area">
-        <h4>구매내역 <button>더 보기 +</button></h4>
+        <h4>구매내역 <button @click="router.push('purchase')">더 보기 +</button></h4>
         <SliderView :sliderData="purchaseData" />
       </div>
     </div>
     <div class="pd-30">
       <div class="cont_area">
-        <h4>주문/배송조회 <button>배송 현황</button></h4>
+        <h4>주문/배송조회 <button @click="router.push('delivery')">배송 현황</button></h4>
         <ul class="delivery_area">
           <li>
             <img src="@/assets/img/delivery_01.png" alt="주문 접수" />
@@ -70,7 +70,9 @@
 import api from "@/api/userApi.js";
 import { computed, onBeforeMount, ref } from "vue";
 import SliderView from "@/components/public/SliderView.vue";
+import { useRouter } from "vue-router";
 
+let router = useRouter();
 let data = ref({});
 // let clickTab = ref(1);
 let basketData = [
