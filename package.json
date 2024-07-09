@@ -14,6 +14,8 @@
     "dropzone": "^6.0.0-beta.2",
     "vue": "^3.2.13",
     "vue-router": "^4.4.0",
+    "vue-slider-component": "^4.1.0-beta.7",
+    "vue3-carousel": "^0.3.3",
     "vue3-dropzone": "^2.2.1",
     "vuex": "^4.1.0"
   },
