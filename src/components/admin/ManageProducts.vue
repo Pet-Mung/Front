@@ -52,6 +52,9 @@
 import productApi from "@/api/productApi";
 // import axios from "axios";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+let router = useRouter();
 
 const imagePreview = ref(null);
 const selectedFiles = ref([]);
@@ -59,8 +62,8 @@ const imageUrls = ref("");
 
 const productName = ref("");
 const productCategory = ref("");
-const productPrice = ref(0);
-const productCount = ref(0);
+const productPrice = ref("");
+const productCount = ref("");
 const productContent = ref("");
 
 const readInputFile = (e) => {
@@ -95,17 +98,18 @@ const readInputFile = (e) => {
       // imagePreview.value.querySelectorAll("img").style.width = "100px";
       // console.log(imageUrls);
       // imageUrls.value.push(e.target.result);
-      imageUrls.value += e.target.result + ",";
+      imageUrls.value = e.target.result;
+      // imageUrls.value += e.target.result + ",";
     };
     reader.readAsDataURL(file);
   });
 };
 
 const uploadProduct = async () => {
-  // if (selectedFiles.value.length === 0) {
-  //   alert("업로드할 파일을 선택하세요.");
-  //   return;
-  // }
+  if (selectedFiles.value.length === 0) {
+    alert("업로드할 파일을 선택하세요.");
+    return;
+  }
 
   const productData = {
     name: productName.value,
@@ -118,6 +122,8 @@ const uploadProduct = async () => {
   try {
     const response = await productApi.postProduct(productData);
     console.log("response", response);
+    alert("등록완료");
+    router.go();
   } catch (error) {
     console.error("업로드 에러", error);
   }
@@ -132,12 +138,20 @@ const uploadProduct = async () => {
 .product-form {
   flex-direction: column;
   row-gap: 20px;
+  padding-bottom: 100px;
   label {
     font-size: 16px;
     padding-right: 10px;
   }
   .custom-file {
     padding-top: 12px;
+  }
+  button {
+    padding: 10px;
+    background-color: bisque;
+    // display: inline;
+    width: 120px;
+    border-radius: 15px;
   }
 }
 </style>

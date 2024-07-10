@@ -36,19 +36,19 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
 
-const store =useStore();
-const loginSuccess = computed(()=>{
+const store = useStore();
+const loginSuccess = computed(() => {
   return store.state.login.loginSuccess;
 });
-let userId = ref(localStorage.getItem('userId'));
-console.log(userId)
-if(userId.value == '' || userId.value == undefined ){
-  store.commit('login/setLoginStatus',false);
-} else{
-  store.commit('login/setLoginStatus',true);
+let userId = ref(localStorage.getItem("userId"));
+// console.log(userId)
+if (userId.value == "" || userId.value == undefined) {
+  store.commit("login/setLoginStatus", false);
+} else {
+  store.commit("login/setLoginStatus", true);
 }
 </script>
 

@@ -11,7 +11,7 @@ import JoinView from "@/components/public/JoinView.vue";
 
 //shop
 import Product from "@/components/shop/ShopProduct.vue";
-// import ProductDetail from "@/components/shop/ProductDetail.vue";
+import ProductDetail from "@/components/shop/ProductDetail.vue";
 
 // mypage
 import UserDelivery from "@/components/user/UserDelivery.vue";
@@ -55,7 +55,11 @@ const routes = [
       {
         path: "products",
         component: Product,
-        //  children: [{ path: "detail/:id", component: ProductDetail }],
+        // children: [{ path: "detail", component: ProductDetail }],
+      },
+      {
+        path: "products/detail",
+        component: ProductDetail,
       },
     ],
   },
