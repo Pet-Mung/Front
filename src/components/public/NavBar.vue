@@ -40,8 +40,8 @@ import { getItemWithExpireTime } from '@/utils/common';
 import { computed,ref} from 'vue';
 import { useStore } from 'vuex';
 
-const store =useStore();
-const loginSuccess = computed(()=>{
+const store = useStore();
+const loginSuccess = computed(() => {
   return store.state.login.loginSuccess;
 });
 let userId = ref(getItemWithExpireTime('userInfoObj')?.userId);
