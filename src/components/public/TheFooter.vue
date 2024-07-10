@@ -50,6 +50,8 @@
     <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="대부분 아이콘">대부분 아이콘 제작자: Freepik - Flaticon</a> -->
     <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="대부분 아이콘">대부분 아이콘 제작자: Freepik - Flaticon</a> -->
     <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="개 아이콘">개 아이콘 제작자: Freepik - Flaticon</a> -->
+    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="쇼핑 카트 아이콘">쇼핑 카트 아이콘 제작자: Freepik - Flaticon</a> -->
+    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">- 아이콘 제작자: Freepik - Flaticon</a> -->
   </div>
 </template>
 

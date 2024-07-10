@@ -38,6 +38,9 @@
       justify-content: right;
     }
   }
+  .nav_bar *{
+    font-family: var(--bs-side-font-family);
+  }
   .nav_bar li {
     /* width : 20%; */
     margin: 10px;
