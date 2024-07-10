@@ -8,25 +8,38 @@
           <h3 class="fc-w ml-5 mr-15 pd-10 fs-30">
             {{ data.user_name }}<span class="fs-15"> 님</span>
           </h3>
-          <button class="pd-10 fs-15 fb bx-shadow" @click="router.push('profile')">내정보 수정</button>
+          <button class="pd-10 fs-15 bx-shadow" @click="router.push('profile')">
+            내정보 수정
+          </button>
         </div>
       </div>
     </div>
     <div class="pd-30">
       <div class="cont_area">
-        <h4>장바구니 <button @click="router.push('basket')">더 보기 +</button></h4>
+        <div class="title_s pd-10">
+          <img src="@/assets/img/cart_icon.png" alt="장바구니" />
+          <h4 class="fs-18 mlr-10">장바구니</h4>
+          <button @click="router.push('basket')" class="fb">더 보기 +</button>
+        </div>
         <SliderView :sliderData="basketData" />
       </div>
     </div>
     <div class="pd-30 lect_type_02">
       <div class="cont_area">
-        <h4>구매내역 <button @click="router.push('purchase')">더 보기 +</button></h4>
+        <div class="title_s pd-10">
+          <img src="@/assets/img/purchase_icon.png" alt="구매내역" />
+          <h4 class="fs-18 mlr-10">구매내역</h4>
+          <button @click="router.push('purchase')" class="fb">더 보기 +</button>
+        </div>
         <SliderView :sliderData="purchaseData" />
       </div>
     </div>
     <div class="pd-30">
       <div class="cont_area">
-        <h4>주문/배송조회 <button @click="router.push('delivery')">배송 현황</button></h4>
+        <div class="title_s pd-10">
+          <h4 class="fs-18 mlr-10">주문/배송조회</h4>
+          <button @click="router.push('delivery')" class="fb">배송 현황</button>
+        </div>
         <ul class="delivery_area">
           <li>
             <img src="@/assets/img/delivery_01.png" alt="주문 접수" />
@@ -71,10 +84,14 @@ import api from "@/api/userApi.js";
 import { computed, onBeforeMount, ref } from "vue";
 import SliderView from "@/components/public/SliderView.vue";
 import { useRouter } from "vue-router";
+import { getItemWithExpireTime } from "@/utils/common";
 
 let router = useRouter();
 let data = ref({});
 // let clickTab = ref(1);
+// let constructor = (id,user_id,product_id,count,)=>{
+//   this.
+// }
 let basketData = [
   {
     id: 1,
@@ -85,7 +102,7 @@ let basketData = [
     created_at: "2024-07-09T13:21:56",
     updated_at: null,
     name: "aaaa",
-    image : require('@/assets/img/default.png'),
+    image: require("@/assets/img/default.png"),
   },
   {
     id: 2,
@@ -96,7 +113,7 @@ let basketData = [
     created_at: "2024-07-09T13:22:24",
     updated_at: null,
     name: "aaaa",
-    image : require('@/assets/img/default.png'),
+    image: require("@/assets/img/default.png"),
   },
 ];
 let purchaseData = [
@@ -109,7 +126,7 @@ let purchaseData = [
     created_at: "2024-07-09T13:21:56",
     updated_at: null,
     name: "aaaa",
-    image : require('@/assets/img/default.png'),
+    image: require("@/assets/img/default.png"),
   },
   {
     id: 2,
@@ -120,21 +137,20 @@ let purchaseData = [
     created_at: "2024-07-09T13:22:24",
     updated_at: null,
     name: "aaaa",
-    image : require('@/assets/img/default.png'),
+    image: require("@/assets/img/default.png"),
   },
 ];
 // const imgAdd = (image) => {
 //   this.imgSrc = require(image);
 // }
 const user_idx = computed(() => {
-  return localStorage.getItem("user_idx");
+  return getItemWithExpireTime("userInfoObj")?.user_idx;
 });
 
 const getUserInfo = async () => {
   try {
     const result = await api.getOnlyUser(user_idx.value);
     data.value = result.data[0];
-    console.log(data);
   } catch (error) {
     console.error(error);
   }
@@ -142,55 +158,5 @@ const getUserInfo = async () => {
 
 onBeforeMount(() => {
   getUserInfo();
-  console.log(data.value);
 });
 </script>
-
-<style lang="scss" scoped>
-.lect_type_01 {
-  background-color: var(--primary-color);
-}
-.lect_type_02 {
-  background-color: var(--primary-color-on);
-}
-.cont_area {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.profile {
-  display: flex;
-  align-items: flex-end;
-  img {
-    width: 100%;
-    max-width: 50px;
-    border: 2px solid #b15b02;
-    background-color: #fff;
-    border-radius: 50%;
-  }
-  h3 {
-    border-bottom: 2px solid #fff;
-    font-weight: 400;
-  }
-  button {
-    background-color: #fff;
-    color: var(--primary-color);
-    border-radius: 5px;
-    border: 1px solid #ff9c07;
-  }
-}
-.delivery_area {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  li {
-    margin: 5px;
-    img {
-      width: 100%;
-      max-width: 100px;
-    }
-    &.arrow_r img {
-      max-width: 30px;
-    }
-  }
-}
-</style>

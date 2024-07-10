@@ -23,7 +23,7 @@
         <input
           type="text"
           name="zoneCode"
-          v-model="addr.zonecode"
+          v-model="zonecode"
           readonly
           @mousedown="$event.preventDefault()"
           @click="addressSearch"
@@ -48,38 +48,10 @@
           type="text"
           name="detailAddr"
           placeholder="oo동 ,oo호 입력"
-          v-model="addr.detailAddr"
+          v-model="info.detail_address"
         />
       </div>
     </div>
-    <!-- password -->
-    <!-- <div class="user_input">
-      <label for="userPw">비밀번호</label>
-      <input
-        type="password"
-        @keyup="pwdCheck"
-        id="userPw"
-        v-model="info.password"
-      />
-    </div>
-    <div class="user_input">
-      <label for="userPwChk">비밀번호 확인</label>
-      <input
-        type="password"
-        @keyup="pwdCheck"
-        @keyup.enter="isPwCheck"
-        id="userPwChk"
-        v-model="info.password_check"
-      />
-      <img
-        v-if="isInput"
-        :src="
-          chkPw ? require('@/assets/img/o.png') : require('@/assets/img/x.png')
-        "
-        :alt="chkPw ? '일치' : '불일치'"
-      />
-    </div>
-    <p>8글자 이상 12글자 이하의 숫자와,문자,특수문자로 입력해주세요.</p> -->
     <div class="confirm_box">
       <button type="button" class="confirm_btn" @click="modifyBtn">확인</button>
     </div>
@@ -88,8 +60,8 @@
 
 <script setup>
 import api from "@/api/userApi.js";
-import { reactive, computed, onBeforeMount } from "vue";
-import { emailCheck, nameCheck, phoneCheck } from "@/utils/common.js";
+import { reactive, computed, onBeforeMount, ref } from "vue";
+import { emailCheck, getItemWithExpireTime, nameCheck, phoneCheck } from "@/utils/common.js";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -99,13 +71,10 @@ let info = reactive({
   user_name: "",
   email: "",
   address: "",
+  detail_address: "",
   phone_number: "",
 });
-let addr = reactive({
-  zonecode: "",
-  roadAddr: "",
-  detailAddr: "",
-});
+let zonecode = ref("");
 // info 받아온 값
 let originInfo = {};
 // 전체 유효성 체크
@@ -114,7 +83,7 @@ let isCheck = false;
 let modifyBool = false;
 
 const user_idx = computed(() => {
-  return localStorage.getItem("user_idx");
+  return getItemWithExpireTime('userInfoObj')?.user_idx;
 });
 
 // user 정보 조회 api 호출
@@ -124,9 +93,10 @@ const getUserInfo = async () => {
     let data = result.data[0];
     originInfo = result.data[0];
     info.user_name = data.user_name;
-    info.address = data.address;
-    info.phone_number = data.phone_number;
     info.email = data.email;
+    info.phone_number = data.phone_number;
+    info.address = data.address.split('&')[0];
+    info.detail_address = data.address.split('&')[1];
   } catch (error) {
     console.error(error);
   }
@@ -177,7 +147,8 @@ const modifyBtn = () => {
     originInfo.user_name == info.user_name &&
     originInfo.email == info.email &&
     originInfo.phone_number == info.phone_number &&
-    originInfo.address == info.address
+    originInfo.address == info.address &&
+    originInfo.detail_address == info.detail_address
   ) {
     modifyBool = false;
   } else modifyBool = true;
@@ -191,12 +162,13 @@ const modifyBtn = () => {
   }
 };
 
+// 주소 검색 다음 api 사용
 const addressSearch = () => {
   new window.daum.Postcode({
     oncomplete: (data) => {
-      addr.zonecode = data.zonecode;
+      zonecode = data.zonecode;
       info.address = data.roadAddress;
-      addr.detailAddr = data.detailAddress;
+      info.detailAddr = data.detailAddress;
     },
   }).open();
 };

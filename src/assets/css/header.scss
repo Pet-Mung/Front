@@ -13,6 +13,7 @@
     .logo_area {
       margin: 0 auto;
       width: 150px;
+      cursor: pointer;
       img {
         width: 80px;
         display: block;
@@ -36,6 +37,9 @@
     &.nv_right {
       justify-content: right;
     }
+  }
+  .nav_bar *{
+    font-family: var(--bs-side-font-family);
   }
   .nav_bar li {
     /* width : 20%; */

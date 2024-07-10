@@ -49,9 +49,10 @@ const isModalOpen = computed(()=>{
 if(loginSuccess.value){
   alert('로그아웃 되셨습니다.');
   store.commit('login/setLoginStatus',false);
-  localStorage.clear();
+  window.sessionStorage.clear();
 }
 
+// 로그인 로직 확인
 const loginCheck = async () => {
     if(info.username === "") {
         alert("아이디를 입력해주세요.");
@@ -62,11 +63,11 @@ const loginCheck = async () => {
         isCheck.isNotPw = true;
     } else {
       await store.dispatch('login/getLoginUser',info);
-      console.log(loginSuccess.value)
       if(loginSuccess.value) router.push('/main');
     }
 }
 
+// isOpenModal state 관리
 const openModal = () => {
   store.commit('common/setIsModalOpen',true);
 }

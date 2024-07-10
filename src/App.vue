@@ -21,6 +21,7 @@ import TheFooter from "@/components/public/TheFooter.vue";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 import API from "./api/apiAuth";
+import { getItemWithExpireTime } from "./utils/common";
 
 const route = useRoute();
 const mainPath = computed(() => {
@@ -30,10 +31,10 @@ const subPath = computed(() => {
   return route.path.split("/")[2];
 });
 const userId = computed(()=>{
-  return localStorage.getItem('userId');
+  return getItemWithExpireTime('userInfoObj')?.userId;
 });
 const type = computed(()=>{
-  return localStorage.getItem('type');
+  return getItemWithExpireTime('userInfoObj')?.type;
 });
 API.setAuthToken(userId.value, type.value);
 </script>

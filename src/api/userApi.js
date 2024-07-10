@@ -7,9 +7,11 @@ const joinUser = async (info)=>{
         const response = await API.post(`user/create`,info);
         return response.data;
     } catch (error){
-        console.log(error.response);
+       
         if(error.response.status === 409){
             alert(error.response.data.detail)
+        } else{
+            console.error(error.response);
         }
     }
 }
