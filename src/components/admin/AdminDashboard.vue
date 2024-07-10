@@ -11,9 +11,6 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-.admin-wrapper {
-  padding-bottom: 200px;
-}
 a {
   display: inline-block;
   padding-right: 20px;

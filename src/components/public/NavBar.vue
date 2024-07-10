@@ -1,7 +1,9 @@
 <template>
   <nav>
     <ul class="nav_bar nv_left">
-      <li>PRODUCT ALL</li>
+      <li>
+        <router-link to="/shop/products">PRODUCT ALL</router-link>
+      </li>
       <li>CATEGORY1</li>
       <li>CATEGORY2</li>
     </ul>

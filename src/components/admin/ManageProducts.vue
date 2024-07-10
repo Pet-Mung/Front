@@ -4,11 +4,19 @@
     <form @submit.prevent="uploadProduct" class="product-form flex">
       <div>
         <label for="name">상품명:</label>
-        <input type="text" id="name" v-model="productName" required />
+        <input type="text" id="name" v-model="product.name" required />
+      </div>
+      <div>
+        <label for="animalCategory">동물 카테고리:</label>
+        <select id="animalCategory" v-model="product.animalCategory" required>
+          <option value="" disabled>카테고리를 선택하세요</option>
+          <option value="고양이">고양이</option>
+          <option value="강아지">강아지</option>
+        </select>
       </div>
       <div>
         <label for="category">카테고리:</label>
-        <select id="category" v-model="productCategory" required>
+        <select id="category" v-model="product.category" required>
           <option value="" disabled>카테고리를 선택하세요</option>
           <option value="사료">사료</option>
           <option value="간식">간식</option>
@@ -21,15 +29,15 @@
       </div>
       <div>
         <label for="price">가격:</label>
-        <input type="number" id="price" v-model="productPrice" required />
+        <input type="number" id="price" v-model="product.price" required />
       </div>
       <div>
         <label for="count">개수:</label>
-        <input type="number" id="count" v-model="productCount" required />
+        <input type="number" id="count" v-model="product.count" required />
       </div>
       <div>
         <label for="content">상품 설명:</label>
-        <textarea id="content" v-model="productContent" required></textarea>
+        <textarea id="content" v-model="product.content" required></textarea>
       </div>
       <div>
         <label for="image">이미지 첨부:</label>
@@ -48,36 +56,33 @@
 </template>
 
 <script setup>
-// import { API } from "@/api/apiAuth";
 import productApi from "@/api/productApi";
-// import axios from "axios";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 let router = useRouter();
-
 const imagePreview = ref(null);
 const selectedFiles = ref([]);
-const imageUrls = ref("");
-
-const productName = ref("");
-const productCategory = ref("");
-const productPrice = ref("");
-const productCount = ref("");
-const productContent = ref("");
-
+const imageUrls = ref([]);
+const product = reactive({
+  name: "",
+  category: "",
+  price: "",
+  count: "",
+  content: "",
+  animalCategory: "",
+});
 const readInputFile = (e) => {
   // const imagePreview = this.$refs.imagePreview;
   imagePreview.value.innerHTML = "";
 
   const files = e.target.files;
-
   const fileArr = Array.prototype.slice.call(files);
-  // console.log(fileArr);
+  console.log("fileArr", fileArr);
 
   selectedFiles.value = fileArr;
-  imageUrls.value = "";
-  // console.log(selectedFiles.value);
+  // 초기화
+  imageUrls.value = [];
 
   fileArr.forEach((file) => {
     if (!file.type.match("image/.*")) {
@@ -91,15 +96,12 @@ const readInputFile = (e) => {
       img.src = e.target.result;
 
       imagePreview.value.appendChild(img);
-      // console.log(imagePreview.value.querySelector("img"));
+
       imagePreview.value.querySelectorAll("img").forEach((element) => {
         element.style.width = "100px";
       });
-      // imagePreview.value.querySelectorAll("img").style.width = "100px";
-      // console.log(imageUrls);
-      // imageUrls.value.push(e.target.result);
-      imageUrls.value = e.target.result;
-      // imageUrls.value += e.target.result + ",";
+      imageUrls.value.push(e.target.result);
+      console.log(imageUrls.value);
     };
     reader.readAsDataURL(file);
   });
@@ -112,18 +114,21 @@ const uploadProduct = async () => {
   }
 
   const productData = {
-    name: productName.value,
-    category: productCategory.value,
-    price: productPrice.value,
-    count: productCount.value,
-    content: productContent.value,
+    name: product.name,
+    animal_category: product.animalCategory,
+    category: product.category,
+    price: product.price,
+    count: product.count,
+    content: product.content,
     image: imageUrls.value,
   };
   try {
-    const response = await productApi.postProduct(productData);
-    console.log("response", response);
-    alert("등록완료");
-    router.go();
+    const result = await productApi.postProduct(productData);
+    if (result.status === "200") {
+      alert("등록완료");
+      router.go();
+    }
+    console.log("result", result);
   } catch (error) {
     console.error("업로드 에러", error);
   }

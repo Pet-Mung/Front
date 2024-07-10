@@ -13,6 +13,23 @@ export function getItemWithExpireTime(keyName) {
   return obj;
 }
 
+//base 64 이미지 변환
+export function commonImage(imgSrc){
+//   let img = new Image();
+//   img.addEventListener('load',()=>{
+//     //캔버스에 그리기
+//     let ctx= document.querySelector('canvas').getContext('2d');
+//     ctx.drawImage(img,0,0);
+//     img.src = imgSrc;
+//     return img.src;
+//   });
+   const decode = decodeURIComponent(window.atob(imgSrc))
+   console.log(imgSrc);
+   console.log(decode);
+  //  return decode;
+ }
+
+
 // 이메일 형식 유효성 체크
 export function emailCheck(email) {
   const email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
