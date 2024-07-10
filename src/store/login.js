@@ -17,11 +17,21 @@ export default {
             try {
               const result = await userApi.loginUser(info);
               if(result.access_token){
- 
-                localStorage.setItem('userId',result.access_token);
-                localStorage.setItem('type',result.token_type);
-                localStorage.setItem('username',result.username);
-                localStorage.setItem('user_idx',result.user_id);
+                const now = new Date();
+                //로그인 만료시간 30분으로 설정
+                const ttl = 1800000;
+                const expire = now.getTime() + ttl;
+                console.log('expire',expire);
+                const userInfoObj = {
+                  userId : result.access_token,
+                  type : result.token_type,
+                  username : result.username,
+                  user_idx : result.user_id,
+                  expire : expire,
+                  
+                }
+
+                window.sessionStorage.setItem('userInfoObj',JSON.stringify(userInfoObj));
                 context.commit('setLoginStatus',true);
               }
             } catch (error) {

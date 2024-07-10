@@ -89,7 +89,7 @@
 <script setup>
 import api from "@/api/userApi.js";
 import { reactive, computed, onBeforeMount } from "vue";
-import { emailCheck, nameCheck, phoneCheck } from "@/utils/common.js";
+import { emailCheck, getItemWithExpireTime, nameCheck, phoneCheck } from "@/utils/common.js";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -114,7 +114,7 @@ let isCheck = false;
 let modifyBool = false;
 
 const user_idx = computed(() => {
-  return localStorage.getItem("user_idx");
+  return getItemWithExpireTime('userInfoObj')?.user_idx;
 });
 
 // user 정보 조회 api 호출

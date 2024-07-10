@@ -71,10 +71,14 @@ import api from "@/api/userApi.js";
 import { computed, onBeforeMount, ref } from "vue";
 import SliderView from "@/components/public/SliderView.vue";
 import { useRouter } from "vue-router";
+import { getItemWithExpireTime } from "@/utils/common";
 
 let router = useRouter();
 let data = ref({});
 // let clickTab = ref(1);
+// let constructor = (id,user_id,product_id,count,)=>{
+//   this.
+// }
 let basketData = [
   {
     id: 1,
@@ -127,14 +131,13 @@ let purchaseData = [
 //   this.imgSrc = require(image);
 // }
 const user_idx = computed(() => {
-  return localStorage.getItem("user_idx");
+  return getItemWithExpireTime('userInfoObj')?.user_idx;
 });
 
 const getUserInfo = async () => {
   try {
     const result = await api.getOnlyUser(user_idx.value);
     data.value = result.data[0];
-    console.log(data);
   } catch (error) {
     console.error(error);
   }
@@ -142,7 +145,6 @@ const getUserInfo = async () => {
 
 onBeforeMount(() => {
   getUserInfo();
-  console.log(data.value);
 });
 </script>
 
