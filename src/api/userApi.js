@@ -63,7 +63,7 @@ const getUsers = async ()=>{
 // 특정 회원 정보 조회 api 호출
 const getOnlyUser = async (user_id)=>{
     try{
-        const response = await API.get(`user/${user_id}`);
+        const response = await API.get(`user/?user_id=${user_id}`);
         return response.data;
     } catch (error){
         console.error(error);
@@ -71,9 +71,9 @@ const getOnlyUser = async (user_id)=>{
 }
 
 // 회원 정보 수정 api 호출
-const putOnlyUser = async (user_id)=>{
+const putOnlyUser = async (user_id,info)=>{
     try{
-        const response = await API.put(`user/${user_id}`);
+        const response = await API.put(`user/${user_id}`,info);
         return response.data;
     } catch (error){
         console.error(error);

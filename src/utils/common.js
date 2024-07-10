@@ -22,3 +22,10 @@ export function passwordCheck(password,password_check){
     else return false;
 }
 
+// 핸드폰 번호 형식 유효성 체크
+export function phoneCheck(phone_number){
+    // 01로 시작, (0,1,6,7,8,9 중 하나의 문자) 숫자만 3~4길이, 숫자만 4길이
+    const phone_regex =  /^01([0|1|6|7|9])([0-9]{3,4})([0-9]{4})$/;
+    if(phone_regex.test(phone_number)) return true;
+    else return false;
+}

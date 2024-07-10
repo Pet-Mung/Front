@@ -13,9 +13,12 @@ import JoinView from "@/components/public/JoinView.vue";
 import Product from "@/components/shop/ShopProduct.vue";
 import ProductDetail from "@/components/shop/ProductDetail.vue";
 
-// mypage
+// user
 import UserDelivery from "@/components/user/UserDelivery.vue";
 import UserMypage from "@/components/user/UserMypage.vue";
+import UserProfile from "@/components/user/UserProfile.vue";
+import UserPurchase from "@/components/user/UserPurchase.vue";
+import UserBasket from "@/components/user/UserBasket.vue";
 
 // admin
 import AdminDashboard from "@/components/admin/AdminDashboard.vue";
@@ -70,6 +73,9 @@ const routes = [
     children: [
       { path: "mypage", component: UserMypage },
       { path: "delivery", component: UserDelivery },
+      { path: "profile", component: UserProfile },
+      { path: "purchase", component: UserPurchase },
+      { path: "basket", component: UserBasket },
     ],
   },
   //관리자 페이지

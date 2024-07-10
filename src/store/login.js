@@ -23,10 +23,7 @@ export default {
                 localStorage.setItem('username',result.username);
                 localStorage.setItem('user_idx',result.user_id);
                 context.commit('setLoginStatus',true);
-
               }
-              // access Token, refresh Token, token_type, username 줌
-              // access Token을 env 파일에 세팅 ?? api 확인하기
             } catch (error) {
               console.error(error);
             }

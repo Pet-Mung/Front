@@ -10,7 +10,6 @@ export const API = axios.create({
 //api 요청이 있을때마다 header로 token 보내는 함수
  function setAuthToken(userId,type) {
   const AUTH_TOKEN = `${type} ${userId}`;
-  console.log(AUTH_TOKEN)
   try {
     API.defaults.headers.common["Authorization"] = AUTH_TOKEN;
     // console.log('aa',API.defaults.headers.common.Authorization);
