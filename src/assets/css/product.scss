@@ -1,0 +1,43 @@
+// listView
+.list_style {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4열 그리드 */
+  gap: 20px;
+  width: 100%;
+  .list_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border: 1px solid #f8ab37;
+    background-color: #f8ab37;
+    border-radius: 8px;
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 1;
+      background-color: #fff;
+      border-radius: 8px 8px 0 0;
+    }
+    .txt_wrap {
+      width: 100%;
+      .btn-cart {
+        display: flex;
+        align-items: center;
+        img {
+          width: 20px;
+        }
+        background-color: #000;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .txt_flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+}

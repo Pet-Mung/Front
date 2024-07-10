@@ -15,6 +15,7 @@ import "@/assets/css/header.scss";
 import "@/assets/css/footer.scss";
 import "@/assets/css/modal.scss";
 import "@/assets/css/user.scss";
+import "@/assets/css/product.scss";
 
 import TheHeader from "@/components/public/TheHeader.vue";
 import TheFooter from "@/components/public/TheFooter.vue";

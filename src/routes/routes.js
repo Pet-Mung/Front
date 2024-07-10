@@ -57,12 +57,10 @@ const routes = [
     children: [
       {
         path: "products",
-        component: Product,
-        // children: [{ path: "detail", component: ProductDetail }],
-      },
-      {
-        path: "products/detail",
-        component: ProductDetail,
+        children: [
+          { path: "", component: Product },
+          { path: "detail/:id", component: ProductDetail },
+        ],
       },
     ],
   },
