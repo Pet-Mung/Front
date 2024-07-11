@@ -14,6 +14,7 @@ import "@/assets/css/reset.css";
 import "@/assets/css/header.scss";
 import "@/assets/css/footer.scss";
 import "@/assets/css/modal.scss";
+import "@/assets/css/_variable.scss";
 import "@/assets/css/user.scss";
 import "@/assets/css/product.scss";
 

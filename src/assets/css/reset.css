@@ -100,6 +100,7 @@ button::-moz-focus-inner {
 .pr-20{padding-right: 20px !important;}
 .pr-30{padding-right: 30px !important;}
 .pd-10{padding:10px !important}
+.pd-20{padding:20px !important}
 .pd-30{padding:30px !important}
 .mt-0{margin-top: 0 !important;}
 .mt-5{margin-top: 5px !important;}
@@ -172,5 +173,6 @@ button::-moz-focus-inner {
 .text-center{text-align: center !important;}
 .text-left{text-align: left !important;}
 .text-right{text-align: right !important;}
+.fl{font-weight: lighter;}
 .fb{font-weight: bold;}
 .bx-shadow {box-shadow: 0 3px 3px 0 rgba(0,0,0,0.1), 0 2px 3px 0 rgba(0,0,0,0.19);}

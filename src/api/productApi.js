@@ -23,19 +23,8 @@ const viewIndividualProduct = async (product_id) => {
 // 상품 등록 api 호출
 const postProduct = async (productData) => {
   try {
-    // console.log("aa", API.defaults.headers.common.Authorization);
     console.log(productData);
-    const response = await API.post(
-      "product/",
-      productData
-      // {
-      // headers: {
-      // "Content-Type": "multipart/form-data",
-      //   Authorization:
-      //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ5ZWFqaW4iLCJleHAiOjE3MjA1MTA4NTl9.s4K9wuWkqu-cyjwMBtogKZaxUxBAsMD2L6mVmGYWavk",
-      // },
-      // }
-    );
+    const response = await API.post("product/", productData);
     return response.data;
   } catch (error) {
     console.error(error);

@@ -2,10 +2,10 @@
   <nav>
     <ul class="nav_bar nv_left">
       <li>
-        <router-link to="/shop/products">PRODUCT ALL</router-link>
+        <router-link to="/shop/products">PRODUCT</router-link>
       </li>
-      <li>CATEGORY1</li>
-      <li>CATEGORY2</li>
+      <!-- <li>CATEGORY1</li>
+      <li>CATEGORY2</li> -->
     </ul>
     <ul class="nav_bar nv_right">
       <li v-if="!loginSuccess">
