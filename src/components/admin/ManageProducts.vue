@@ -1,56 +1,61 @@
 <template>
-  <div>
-    <!-- <h1>Manage Products</h1> -->
-    <form @submit.prevent="uploadProduct" class="product-form flex">
-      <div>
-        <label for="name">상품명:</label>
+  <div class="flex_center">
+    <h3 class="fl text-center fs-30 pd-20">Manage Products</h3>
+    <form @submit.prevent="uploadProduct" class="product-form">
+      <div class="pdt_input">
+        <label for="name">상품명</label>
         <input type="text" id="name" v-model="product.name" required />
       </div>
-      <div>
-        <label for="animalCategory">동물 카테고리:</label>
-        <select id="animalCategory" v-model="product.animalCategory" required>
-          <option value="" disabled>카테고리를 선택하세요</option>
-          <option value="고양이">고양이</option>
-          <option value="강아지">강아지</option>
-        </select>
+      <div class="pdt_select">
+        <div class="pdt_input">
+          <label for="animalCategory">동물 카테고리</label>
+          <select id="animalCategory" v-model="product.animalCategory" required>
+            <option value="" disabled>카테고리를 선택하세요</option>
+            <option value="고양이">고양이</option>
+            <option value="강아지">강아지</option>
+          </select>
+        </div>
+        <div class="pdt_input">
+          <label for="category">카테고리</label>
+          <select id="category" v-model="product.category" required>
+            <option value="" disabled>카테고리를 선택하세요</option>
+            <option value="사료">사료</option>
+            <option value="간식">간식</option>
+            <option value="장난감">장난감</option>
+            <option value="노즈워크">노즈워크</option>
+            <option value="케어용품">케어용품</option>
+            <option value="계절상품">계절상품</option>
+            <option value="기타용품">기타용품</option>
+          </select>
+        </div>
       </div>
-      <div>
-        <label for="category">카테고리:</label>
-        <select id="category" v-model="product.category" required>
-          <option value="" disabled>카테고리를 선택하세요</option>
-          <option value="사료">사료</option>
-          <option value="간식">간식</option>
-          <option value="장난감">장난감</option>
-          <option value="노즈워크">노즈워크</option>
-          <option value="케어용품">케어용품</option>
-          <option value="계절상품">계절상품</option>
-          <option value="기타용품">기타용품</option>
-        </select>
+      <div class="pdt_select">
+        <div class="pdt_input">
+          <label for="price">가격</label>
+          <input type="number" id="price" v-model="product.price" required />
+        </div>
+        <div class="pdt_input">
+          <label for="count">개수</label>
+          <input type="number" id="count" v-model="product.count" required />
+        </div>
       </div>
-      <div>
-        <label for="price">가격:</label>
-        <input type="number" id="price" v-model="product.price" required />
-      </div>
-      <div>
-        <label for="count">개수:</label>
-        <input type="number" id="count" v-model="product.count" required />
-      </div>
-      <div>
-        <label for="content">상품 설명:</label>
-        <textarea id="content" v-model="product.content" required></textarea>
-      </div>
-      <div>
-        <label for="image">이미지 첨부:</label>
+      <div class="pdt_input">
+        <label for="image">이미지 첨부</label>
         <!-- <input type="text" id="image" required /> -->
         <div class="custom-file">
           <input id="customFile" type="file" @change="readInputFile" multiple />
         </div>
-        <br />
-        <div id="imagePreview" ref="imagePreview">
-          <img id="img" />
-        </div>
       </div>
-      <button type="submit">상품 등록하기</button>
+      <div id="imagePreview" ref="imagePreview" class="image_preview">
+        <img id="img" />
+      </div>
+      <div class="pdt_input diff_input">
+        <label for="content">상품 설명</label>
+        <textarea id="content" v-model="product.content" required></textarea> 
+      </div>
+      <div class="flex_center">
+        <button type="submit" class="btn_type_01">상품 등록하기</button>
+      </div>
     </form>
   </div>
 </template>
@@ -135,28 +140,4 @@ const uploadProduct = async () => {
 };
 </script>
 
-<style lang="scss" scoped>
-.flex {
-  display: flex;
-  // align-items: center;
-}
-.product-form {
-  flex-direction: column;
-  row-gap: 20px;
-  padding-bottom: 100px;
-  label {
-    font-size: 16px;
-    padding-right: 10px;
-  }
-  .custom-file {
-    padding-top: 12px;
-  }
-  button {
-    padding: 10px;
-    background-color: bisque;
-    // display: inline;
-    width: 120px;
-    border-radius: 15px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
