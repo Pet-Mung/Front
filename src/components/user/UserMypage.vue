@@ -21,7 +21,7 @@
           <h4 class="fs-18 mlr-10">장바구니</h4>
           <button @click="router.push('basket')" class="fb">더 보기 +</button>
         </div>
-        <SliderView :sliderData="basketData" />
+        <SliderView :flag="flag" :sliderData="basketData" />
       </div>
     </div>
     <div class="pd-30 lect_type_02">
@@ -31,7 +31,7 @@
           <h4 class="fs-18 mlr-10">구매내역</h4>
           <button @click="router.push('purchase')" class="fb">더 보기 +</button>
         </div>
-        <SliderView :sliderData="purchaseData" />
+        <SliderView :flag="flag" :sliderData="purchaseData" />
       </div>
     </div>
     <div class="pd-30">
@@ -88,6 +88,8 @@ import { getItemWithExpireTime } from "@/utils/common";
 
 let router = useRouter();
 let data = ref({});
+// slider type
+let flag = 1
 // let clickTab = ref(1);
 // let constructor = (id,user_id,product_id,count,)=>{
 //   this.

@@ -81,6 +81,10 @@ i {
   align-items: center;
   justify-content: center;
 }
+.flex_center.row{
+  flex-direction: row;
+  align-items: flex-start;
+}
 button.confirm_btn {
   background-color: var(--btn-primary-bgcolor);
   border-radius: 5px;
@@ -282,6 +286,7 @@ textarea:focus {
   padding: 10px;
   margin-right: 5px;
   border-radius: 5px;
+  cursor: pointer;
 }
 .tab_cat_01 li.active {
   background-color: #000;
@@ -314,17 +319,55 @@ textarea:focus {
   font-weight: 700;
 }
 
+.tab_cat_03 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.tab_cat_03 li {
+  width: 25%;
+  text-align: center;
+  padding: 20px 10px;
+  background-color:  #fff;
+  color :#1687ff;
+  border-right: 1px solid #b1d7ff;
+  font-size: 20px;
+}
+.tab_cat_03 li:last-child{
+  border:none;
+}
+.tab_cat_03 li.active {
+  font-weight: 700;
+  background-color :#1687ff;
+  color: #fff;
+}
 
 /* slider */
-
-.carousel__item{
-  width: 150px;
+.slider_area{
+  width: 60%;
+  min-width: 400px;
+  height: 420px;
+  padding: 10px;
+  border : 2px solid #fff;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.slider_area .carousel__item {
+  background-color: #fff;
+}
+.slider_area .carousel__pagination-button::after{
+  background-color: #e2e2e2;
+}
+.slider_area .carousel__pagination-button--active::after{
+  background-color: #ff802b;
 }
 .slide_img {
-width: 150px;
+width: 300px;
+padding:20px;
 }
 .carousel__item {
-min-height: 200px;
+min-height: 300px;
 width: 100%;
 background-color: #e7e5e5;
 color: var(--vc-clr-white);

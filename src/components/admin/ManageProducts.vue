@@ -51,7 +51,7 @@
       </div>
       <div class="pdt_input diff_input">
         <label for="content">상품 설명</label>
-        <textarea id="content" v-model="product.content" required></textarea> 
+        <textarea id="content" v-model="product.content" required></textarea>
       </div>
       <div class="flex_center">
         <button type="submit" class="btn_type_01">상품 등록하기</button>
@@ -78,13 +78,9 @@ const product = reactive({
   animalCategory: "",
 });
 const readInputFile = (e) => {
-  // const imagePreview = this.$refs.imagePreview;
   imagePreview.value.innerHTML = "";
-
   const files = e.target.files;
   const fileArr = Array.prototype.slice.call(files);
-  console.log("fileArr", fileArr);
-
   selectedFiles.value = fileArr;
   // 초기화
   imageUrls.value = [];
@@ -106,7 +102,6 @@ const readInputFile = (e) => {
         element.style.width = "100px";
       });
       imageUrls.value.push(e.target.result);
-      console.log(imageUrls.value);
     };
     reader.readAsDataURL(file);
   });
@@ -117,19 +112,20 @@ const uploadProduct = async () => {
     alert("업로드할 파일을 선택하세요.");
     return;
   }
-
   const productData = {
-    name: product.name,
-    animal_category: product.animalCategory,
-    category: product.category,
-    price: product.price,
-    count: product.count,
-    content: product.content,
-    image: imageUrls.value,
+    product_create: {
+      name: product.name,
+      animal_category: product.animalCategory,
+      category: product.category,
+      price: product.price,
+      count: product.count,
+      content: product.content,
+      image: imageUrls.value,
+    },
   };
   try {
     const result = await productApi.postProduct(productData);
-    if (result.status === "200") {
+    if (result) {
       alert("등록완료");
       router.go();
     }

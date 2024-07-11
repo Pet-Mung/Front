@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="props.flag == 1 ">
     <Carousel
       v-bind="settings"
       :breakpoints="breakpoints"
@@ -15,6 +15,23 @@
       </Slide>
       <template #addons>
         <Navigation v-if="props.sliderData.length > 8" />
+      </template>
+    </Carousel>
+  </div>
+
+  <div v-if="props.flag == 2" class="slider_area">
+    <Carousel
+      v-bind="settings"
+      :autoplay="5000"
+      :wrap-around="true"
+    >
+      <Slide class="" v-for="(slide,idx) in props.sliderData" :key="slide">
+        <div class="carousel__item">
+          <img :src="slide" :alt="`상품사진 ${idx}`" class="slide_img" />
+        </div>
+      </Slide>
+      <template #addons>
+        <Navigation />
         <Pagination />
       </template>
     </Carousel>
@@ -23,16 +40,17 @@
 
 <script setup>
 import { defineProps } from "vue";
-import { Carousel, Slide, Navigation } from "vue3-carousel";
+import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 
 import "vue3-carousel/dist/carousel.css";
 const props = defineProps({
   sliderData: { type: Array },
+  flag : {type : Number},
 });
 
 const settings = {
   itemsToShow: 1.5,
-  snapAlign: "start",
+  snapAlign: "center",
 };
 const breakpoints = {
   // 500px and up
@@ -51,6 +69,13 @@ const breakpoints = {
     snapAlign: "start",
   },
 };
-const mouseDrag = props.sliderData.length >= 8 ? true : false;
-const touchDrag = props.sliderData.length >= 8 ? true : false;
+// const breakpoint = {
+//   300 : {
+//     itemsToShow: 1.5,
+//     snapAlign: "middle",
+//   }
+
+// };
+const mouseDrag = props.sliderData?.length >= 8 ? true : false;
+const touchDrag = props.sliderData?.length >= 8 ? true : false;
 </script>

@@ -13,20 +13,9 @@ export function getItemWithExpireTime(keyName) {
   return obj;
 }
 
-//base 64 이미지 변환
-export function commonImage(imgSrc){
-//   let img = new Image();
-//   img.addEventListener('load',()=>{
-//     //캔버스에 그리기
-//     let ctx= document.querySelector('canvas').getContext('2d');
-//     ctx.drawImage(img,0,0);
-//     img.src = imgSrc;
-//     return img.src;
-//   });
-   const decode = decodeURIComponent(window.atob(imgSrc))
-   console.log(imgSrc);
-   console.log(decode);
-  //  return decode;
+// 숫자 , 찍기
+export function commonNumber(paramNum){
+  return Number(paramNum).toLocaleString();
  }
 
 
