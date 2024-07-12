@@ -11,19 +11,24 @@ const viewCart = async () => {
 };
 
 // 장바구니 추가 api 호출
-const addCart = async () => {
+const addCart = async (productId, count) => {
   try {
-    const response = await API.post(`basket/`);
+    const response = await API.post(`basket?product_id=${productId}&count=${count}`);
     return response.data;
   } catch (error) {
-    console.error(error);
+    if(error.response.status === 400){
+      alert(error.response.data.detail)
+  } else{
+      console.error(error);
+  }
+
   }
 };
 
 // 장바구니 삭제 api 호출
-const deleteCart = async () => {
+const deleteCart = async (basket_id) => {
   try {
-    const response = await API.delete(`basket/`);
+    const response = await API.delete(`basket/basket_id=${basket_id}`);
     return response.data;
   } catch (error) {
     console.error(error);

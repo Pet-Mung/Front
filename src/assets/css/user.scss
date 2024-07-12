@@ -172,3 +172,30 @@
     }
   }
 }
+// profile
+
+.profile_wrap {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 0;
+  input:not([type="radio"]) {
+    width: 287px;
+  }
+  .input_addr {
+    input:not([name="detailAddr"]) {
+      cursor: pointer;
+    }
+    input[name="zoneCode"] {
+      width: 170px;
+    }
+  }
+  .radio_area{
+    label:not(:first-child){
+      width: 50px;
+      margin-right: 50px;
+    }
+  }
+}
