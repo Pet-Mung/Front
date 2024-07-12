@@ -10,22 +10,15 @@
         <div class="pdt_input">
           <label for="animalCategory">동물 카테고리</label>
           <select id="animalCategory" v-model="product.animalCategory" required>
-            <option value="" disabled>카테고리를 선택하세요</option>
-            <option value="고양이">고양이</option>
-            <option value="강아지">강아지</option>
+            <option value="" disabled >카테고리를 선택하세요</option>
+            <option :value="item" v-for="item in animalCtgy" :key="item">{{item}}</option>
           </select>
         </div>
         <div class="pdt_input">
           <label for="category">카테고리</label>
           <select id="category" v-model="product.category" required>
             <option value="" disabled>카테고리를 선택하세요</option>
-            <option value="사료">사료</option>
-            <option value="간식">간식</option>
-            <option value="장난감">장난감</option>
-            <option value="노즈워크">노즈워크</option>
-            <option value="케어용품">케어용품</option>
-            <option value="계절상품">계절상품</option>
-            <option value="기타용품">기타용품</option>
+            <option :value="item" v-for="item in ctgy" :key="item">{{item}}</option>
           </select>
         </div>
       </div>
@@ -77,6 +70,18 @@ const product = reactive({
   content: "",
   animalCategory: "",
 });
+const ctgy = ref([]);
+const animalCtgy = ref([]);
+// 용품 카테고리 api 호출
+const getCtgy = async () => {
+  let result = await productApi.getCategory();
+  ctgy.value = result;
+}
+// 동물 카테고리 api 호출
+const getAniCtgy = async () => {
+  let result = await productApi.getAnimalCategory();
+  animalCtgy.value = result;
+}
 const readInputFile = (e) => {
   imagePreview.value.innerHTML = "";
   const files = e.target.files;
@@ -129,11 +134,14 @@ const uploadProduct = async () => {
       alert("등록완료");
       router.go();
     }
-    console.log("result", result);
   } catch (error) {
     console.error("업로드 에러", error);
   }
 };
+// created
+getCtgy();
+getAniCtgy();
+
 </script>
 
 <style lang="scss" scoped></style>

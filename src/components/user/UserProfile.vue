@@ -52,6 +52,32 @@
         />
       </div>
     </div>
+    <div class="user_input radio_area" v-if="mainPath == 'admin'">
+      <label>판매자 여부</label>
+      <input type="radio" name="isSeller" id="se_true" value="se_true" />
+      <label for="se_true">O</label>
+      <input type="radio" name="isSeller" id="se_false" value="se_false" />
+      <label for="se_false">X</label>
+    </div>
+    <div class="user_input radio_area" v-if="mainPath == 'admin'">
+      <label>관리자 여부</label>
+      <input
+        type="radio"
+        name="isAdmin"
+        id="ad_true"
+        v-model="info.is_admin"
+        value="true"
+      />
+      <label for="ad_true">O</label>
+      <input
+        type="radio"
+        name="isAdmin"
+        id="ad_false"
+        v-model="info.is_admin"
+        value="false"
+      />
+      <label for="ad_false">X</label>
+    </div>
     <div class="confirm_box">
       <button type="button" class="confirm_btn" @click="modifyBtn">확인</button>
     </div>
@@ -61,10 +87,16 @@
 <script setup>
 import api from "@/api/userApi.js";
 import { reactive, computed, onBeforeMount, ref } from "vue";
-import { emailCheck, getItemWithExpireTime, nameCheck, phoneCheck } from "@/utils/common.js";
-import { useRouter } from "vue-router";
+import {
+  emailCheck,
+  getItemWithExpireTime,
+  nameCheck,
+  phoneCheck,
+} from "@/utils/common.js";
+import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
+const route = useRoute();
 let info = reactive({
   //   password: "",
   //   password_check: "",
@@ -82,8 +114,15 @@ let isCheck = false;
 // 수정했는지 체크 //수정 안했으면 false
 let modifyBool = false;
 
+const mainPath = computed(() => {
+  return route.path.split("/")[1];
+});
 const user_idx = computed(() => {
-  return getItemWithExpireTime('userInfoObj')?.user_idx;
+  if (mainPath.value == "admin") {
+    return window.sessionStorage.getItem("click_idx");
+  } else {
+    return getItemWithExpireTime("userInfoObj")?.user_idx;
+  }
 });
 
 // user 정보 조회 api 호출
@@ -95,8 +134,9 @@ const getUserInfo = async () => {
     info.user_name = data.user_name;
     info.email = data.email;
     info.phone_number = data.phone_number;
-    info.address = data.address.split('&')[0];
-    info.detail_address = data.address.split('&')[1];
+    info.address = data.address?.split("&")[0];
+    info.detail_address = data.address?.split("&")[1];
+    info.is_admin = data.is_admin;
   } catch (error) {
     console.error(error);
   }
@@ -105,11 +145,11 @@ const getUserInfo = async () => {
 // user 정보 수정 api 호출
 const putUserInfo = async () => {
   try {
-    console.log("1", info);
     const result = await api.putOnlyUser(user_idx.value, info);
     if (result.status == "200") {
       alert(result.detail);
-      router.push("mypage");
+      if (mainPath.value == "admin") router.push("/admin/users");
+      else router.push("mypage");
     }
   } catch (error) {
     console.error(error);
@@ -149,6 +189,7 @@ const modifyBtn = () => {
     originInfo.phone_number == info.phone_number &&
     originInfo.address == info.address &&
     originInfo.detail_address == info.detail_address
+    // originInfo.is_admin == info.is_admin 
   ) {
     modifyBool = false;
   } else modifyBool = true;
@@ -177,25 +218,3 @@ onBeforeMount(() => {
   getUserInfo();
 });
 </script>
-
-<style lang="scss" scoped>
-.profile_wrap {
-  min-height: 40vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 50px 0;
-  input {
-    width: 287px;
-  }
-  .input_addr {
-    input:not([name="detailAddr"]) {
-      cursor: pointer;
-    }
-    input[name="zoneCode"] {
-      width: 170px;
-    }
-  }
-}
-</style>

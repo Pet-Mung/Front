@@ -33,9 +33,18 @@
     width: 100%;
     display: flex;
     margin-top: 20px;
-    padding-right: 50px;
+    &.nv_left{
+      padding-left: 50px;
+      li{
+        cursor: pointer;
+        &.active{
+          color : #ff402b;
+        }
+      }
+    }
     &.nv_right {
       justify-content: right;
+      padding-right: 50px;
     }
   }
   .nav_bar *{

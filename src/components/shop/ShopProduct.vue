@@ -15,18 +15,31 @@
 
 <script setup>
 import productApi from "@/api/productApi";
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, onUpdated, ref, watch } from "vue";
 import ListView from "@/components/public/ListView.vue";
-
+import { useStore } from "vuex";
+const store = useStore();
 let selectTab = ref(1);
 const originalProducts = ref([]);
 const products = ref([]);
-
+const categoryName = computed(() => {
+  return store.state.common.category_name;
+});
+const isChange = computed(() => {
+  return store.state.common.isChange;
+});
 //상품 정보 전체 조회 api 호출
 const getAllProduct = async () => {
   try {
     const result = await productApi.viewAllProduct();
-    dataSorting(result);
+    if (categoryName.value == "ALL") {
+      dataSorting(result);
+    } else {
+      let filterData = result.filter(
+        (item) => categoryName.value == item.category
+      );
+      dataSorting(filterData);
+    }
   } catch (error) {
     console.error(error);
   }
@@ -35,28 +48,27 @@ const getAllProduct = async () => {
 // sorting
 const dataSorting = (data) => {
   let soltArr = [];
-    let pattern = /[\D]/gi;
-    soltArr = data.sort((a, b) => {
-      let createdNumA = a.created_at.replaceAll(pattern, "");
-      let updatedNumA =
-        a.updated_at == null
-          ? a.updated_at
-          : a.updated_at.replaceAll(pattern, "") | 0;
-      let createdNumB = b.created_at.replaceAll(pattern, "");
-      let updatedNumB =
-        b.updated_at == null
-          ? b.updated_at
-          : b.updated_at.replaceAll(pattern, "") | 0;
-      let amax = createdNumA > updatedNumA ? createdNumA : a.updatedNumA;
-      let bmax = createdNumB > updatedNumB ? createdNumB : a.updatedNumB;
-      if (amax < bmax) return 1;
-      else if (amax > bmax) return -1;
-      else 0;
-    });
-    originalProducts.value = [...soltArr];
-    productDataChange();
-}
-
+  let pattern = /[\D]/gi;
+  soltArr = data.sort((a, b) => {
+    let createdNumA = a.created_at.replaceAll(pattern, "");
+    let updatedNumA =
+      a.updated_at == null
+        ? a.updated_at
+        : a.updated_at.replaceAll(pattern, "") | 0;
+    let createdNumB = b.created_at.replaceAll(pattern, "");
+    let updatedNumB =
+      b.updated_at == null
+        ? b.updated_at
+        : b.updated_at.replaceAll(pattern, "") | 0;
+    let amax = createdNumA > updatedNumA ? createdNumA : a.updatedNumA;
+    let bmax = createdNumB > updatedNumB ? createdNumB : a.updatedNumB;
+    if (amax < bmax) return 1;
+    else if (amax > bmax) return -1;
+    else 0;
+  });
+  originalProducts.value = [...soltArr];
+  productDataChange();
+};
 
 // tab 선택에 따라 data 변경
 const productDataChange = () => {
@@ -75,6 +87,13 @@ const productDataChange = () => {
 
 onMounted(() => {
   getAllProduct();
+});
+onUpdated(() => {
+  if (isChange.value) {
+    getAllProduct();
+    selectTab.value = 1;
+  }
+  store.commit("common/setIsChange", false);
 });
 watch(selectTab, () => {
   productDataChange();

@@ -59,6 +59,7 @@ const routes = [
         path: "products",
         children: [
           { path: "", component: Product },
+          { path: ":id", component: Product },
           { path: "detail/:id", component: ProductDetail },
         ],
       },
@@ -83,7 +84,14 @@ const routes = [
     children: [
       { path: "orders", component: ManageOrders },
       { path: "products", component: ManageProducts },
-      { path: "users", component: ManageUsers },
+      {
+        path: "users",
+        // component: ManageUsers,
+        children: [
+          { path: "", component: ManageUsers },
+          { path: "profile", component: UserProfile },
+        ],
+      },
     ],
   },
 ];

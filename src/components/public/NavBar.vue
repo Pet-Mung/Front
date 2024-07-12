@@ -1,11 +1,12 @@
 <template>
   <nav>
     <ul class="nav_bar nv_left">
-      <li>
-        <router-link to="/shop/products">PRODUCT</router-link>
+      <li @click="selectCtgy('ALL')" :class="{active : categoryName =='ALL'}" >
+        ALL
       </li>
-      <!-- <li>CATEGORY1</li>
-      <li>CATEGORY2</li> -->
+      <li v-for="(item,idx) in ctgy" :key="item" @click="selectCtgy(item,idx)" :class="{active : categoryName == item}">
+        {{ item }}
+      </li>
     </ul>
     <ul class="nav_bar nv_right">
       <li v-if="!loginSuccess">
@@ -38,18 +39,41 @@
 </template>
 
 <script setup>
-import { getItemWithExpireTime } from '@/utils/common';
-import { computed,ref} from 'vue';
-import { useStore } from 'vuex';
+import productApi from "@/api/productApi";
+import { getItemWithExpireTime } from "@/utils/common";
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 const store = useStore();
+const router = useRouter();
 const loginSuccess = computed(() => {
   return store.state.login.loginSuccess;
 });
-let userId = ref(getItemWithExpireTime('userInfoObj')?.userId);
-if(userId.value != '' && userId.value != undefined ){
-  store.commit('login/setLoginStatus',true);
-} 
+let userId = ref(getItemWithExpireTime("userInfoObj")?.userId);
+if (userId.value != "" && userId.value != undefined) {
+  store.commit("login/setLoginStatus", true);
+}
+let ctgy = ref([]);
+const categoryName = computed(() => {
+  return store.state.common.category_name;
+});
+
+// 용품 카테고리 api 호출
+const getCtgy = async () => {
+  let result = await productApi.getCategory();
+  ctgy.value = result;
+};
+// 선택한 카테고리 이름 store 저장
+const selectCtgy = (ctgyName,idx ) => {
+  idx +=1;
+  store.commit("common/setCtgyName", ctgyName);
+  
+  if(idx) router.push(`/shop/products/${idx}`);
+  else router.push(`/shop/products`);
+};
+// created
+getCtgy();
 </script>
 
 <style lang="scss" scoped></style>
