@@ -30,16 +30,15 @@
     }
   }
   .nav_bar {
-    width: 100%;
     display: flex;
     margin-top: 20px;
+    li.active{
+      color : #ff402b;
+    }
     &.nv_left{
       padding-left: 50px;
       li{
         cursor: pointer;
-        &.active{
-          color : #ff402b;
-        }
       }
     }
     &.nv_right {

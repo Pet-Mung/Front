@@ -1,26 +1,30 @@
 <template>
   <div>
+    <ul class="no_data mb-30" v-if="props.list.length == 0 ">
+      <li class="no_data" > 
+        <img src="@/assets/img/nodata_icon.png" alt="no_data" />
+        <p>데이터가 없습니다.</p>
+      </li>
+    </ul>
     <ul class="list_style mb-30">
+   
       <li
         class="list_content"
         v-for="(item, index) in props.list"
         :key="index"
         @click="clickProduct(item.id)"
       >
-        <img :src="item.thumbnail"
-          :alt="item.name"
-          class="pd-10"
-        />
+        <img :src="item.thumbnail" :alt="item.name" class="pd-10" />
         <div class="txt_wrap pd-10">
-          <p class="mb-10">
-            {{ item.animal_category }} {{ item.category }}
-          </p>
+          <p class="mb-10">{{ item.animal_category }} {{ item.category }}</p>
           <p class="mb-10 fb fs-18">{{ item.name }}</p>
-          <div class="txt_flex ">
+          <div class="txt_flex">
             <p>{{ commonNumber(item.price) }}<span>원</span></p>
             <button type="button" class="btn-cart bx-shadow" v-if="isLogin">
-              <span v-if="isCart" @click="delCartBtn(item.name)">Delete CART</span>
-              <span v-else @click.stop="addCartBtn(item.id)">ADD CART +</span>
+              <span v-if="item.isCart" @click.stop="delCartBtn(item)"
+                >Delete CART</span
+              >
+              <span v-else @click.stop="addCartBtn(item)">ADD CART +</span>
               <!-- <img src="@/assets/img/cart_icon.png" alt="cart" /> -->
             </button>
           </div>
@@ -32,7 +36,7 @@
 
 <script setup>
 import { getItemWithExpireTime } from "@/utils/common";
-import { computed, defineProps } from "vue";
+import { computed, defineProps, } from "vue";
 import { useRouter } from "vue-router";
 import { commonNumber } from "@/utils/common";
 import { useStore } from "vuex";
@@ -47,45 +51,65 @@ const isLogin = computed(() => {
   if (userId !== null && userId !== undefined) return true;
   else return false;
 });
-const isCart = false;
-const basketInfo = computed(()=>{
+const basketInfo = computed(() => {
   return store.state.common.basketInfo;
 });
-
+const user_idx = computed(() => {
+    return getItemWithExpireTime("userInfoObj")?.user_idx;
+});
+// const arr = ref([...props.list]);
 // 장바구니 조회 api 호출
-const getBasket = () =>{
-  store.dispatch('common/getBasketView');
-} 
-// console.log('basketInfo',basketInfo.value);
+const getBasket = async () => {
+  await store.dispatch("common/getBasketView");
+  // if (basketInfo.value.length >= 1) {
+  //   console.log('aa')
+  //   basketInfo.value.forEach((basket) => {
+  //     arr.value.filter((item) => {
+  //       if (item.name == basket.product_name) {
+  //         item.isCart = true;
+  //       } else {
+  //         item.isCart = false;
+  //       }
+  //     });
+  //   });
+  // }
+};
+
 // 장바구니 추가 api 호출
-const addCartBtn = async (productId) =>{
+const addCartBtn = async (item) => {
   let count = 1;
   const addBasketinfo = {
-    productId : productId,
-    count : count,
-  }
- 
-  await store.dispatch('common/addBasket',addBasketinfo);
-} 
+    productId: item.id,
+    count: count,
+  };
+  await store.dispatch("common/addBasket", addBasketinfo);
+  item.isCart = true;
+  // getBasket();
+};
 // 장바구니 삭제 api 호출
-const delCartBtn = async (name) =>{
-  console.log('basketInfo',basketInfo.value);
-  basketInfo.value.filter((item)=>{
-    name == item.product_name;
+const delCartBtn = (pdt) => {
+  console.log("basketInfo", basketInfo.value);
+  let nameArr = {};
+  nameArr = basketInfo.value.filter((item) => {
+    return pdt.name == item.product_name;
   });
-  console.log('basketInfo',basketInfo.value);
-  // name 
+  // nameArr.forEach((item) => {
+  //   store.dispatch("common/delBasket", item.id);
+  // });
+  store.dispatch("common/delBasket", nameArr.id);
+  pdt.isCart = false;
+  // getBasket();
+};
 
-  console.log(name)
-  await store.dispatch('common/delBasket',name);
-} 
-
-// detail page 
+// detail page
 const clickProduct = (id) => {
   window.sessionStorage.setItem("productId", id);
   router.push(`/shop/products/detail/${id}`);
 };
 
 // created
-getBasket();
+if(user_idx.value) getBasket();
+
+
 </script>
+

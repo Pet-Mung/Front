@@ -13,6 +13,7 @@
           <th>전화번호</th>
           <th>활동여부</th>
           <th>수정</th>
+          <th>삭제</th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
           <td>{{ userInfo.phone_number == 'None' ? '-' : userInfo.phone_number}}</td>
           <td>{{ userInfo.is_active ? 'YES' : 'NO'}}</td>
           <td @click="modifyInfo(userInfo.id)"><img class="edit_icon" src="@/assets/img/edit_icon.png" alt="수정 버튼"></td>
+          <td @click="deleteInfo(userInfo.id)"><img class="edit_icon" src="@/assets/img/del_icon.png" alt="삭제 버튼"></td>
         </tr>
       </tbody>
     </table>
@@ -38,8 +40,10 @@
 import {ref} from 'vue';
 import api from "@/api/userApi.js";
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
-let router = useRouter();
+const store = useStore();
+const router = useRouter();
 let usersInfo = ref([]);
 const getUsersInfo = async () => {
   try {
@@ -53,7 +57,12 @@ const modifyInfo = (id) => {
   window.sessionStorage.setItem('click_idx',id);
   router.push('users/profile');
 }
-
+const deleteInfo = (id) => {
+  if (confirm("정말 삭제하시겠습니까?") ==true){
+    store.dispatch('common/delUserInfo',id);
+    router.go();
+  }
+}
 getUsersInfo();
 </script>
 
