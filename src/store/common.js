@@ -48,6 +48,7 @@ export default {
       try {
         const result = await purchaseApi.addCart(addBasketinfo.productId, addBasketinfo.count);
         // context.commit('setBasketInfo',result);
+        console.log(result);
       } catch (error) {
         console.error(error);
       }
