@@ -1,10 +1,11 @@
-import api from "@/api/purchaseApi";
+import purchaseApi from "@/api/purchaseApi";
+import userApi from "@/api/userApi";
 export default {
   namespaced: true,
   state() {
     return {
       isModalOpen: false,
-      basketInfo : {},
+      basketInfo : [],
       adminTab : 1,
       category_name : 'ALL',
       isChange : false,
@@ -36,8 +37,7 @@ export default {
     // 장바구니 조회 api 호출
     async getBasketView(context) {
       try {
-        const result = await api.viewCart();
-        // console.log(result);
+        const result = await purchaseApi.viewCart();
         context.commit('setBasketInfo',result);
       } catch (error) {
         console.error(error);
@@ -46,8 +46,8 @@ export default {
     // 장바구니 추가 api 호출
     async addBasket(context,addBasketinfo) {
       try {
-        const result = await api.addCart(addBasketinfo.productId, addBasketinfo.count);
-        console.log('result',result);
+        const result = await purchaseApi.addCart(addBasketinfo.productId, addBasketinfo.count);
+        // context.commit('setBasketInfo',result);
       } catch (error) {
         console.error(error);
       }
@@ -55,8 +55,22 @@ export default {
     // 장바구니 삭제 api 호출
     async delBasket(context,basketId) {
       try {
-        const result = await api.deleteCart(basketId);
+        const result = await purchaseApi.deleteCart(basketId);
+        if(result.status == '404'){
+          alert(result.detail);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    //회원탈퇴
+    async delUserInfo(context,userId) {
+      try {
+        const result = await userApi.delOnlyUser(userId);
         console.log(result);
+        if(result.status == '404'){
+          alert(result.detail);
+        }
       } catch (error) {
         console.error(error);
       }

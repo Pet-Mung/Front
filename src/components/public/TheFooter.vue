@@ -52,6 +52,8 @@
     <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="개 아이콘">개 아이콘 제작자: Freepik - Flaticon</a> -->
     <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="쇼핑 카트 아이콘">쇼핑 카트 아이콘 제작자: Freepik - Flaticon</a> -->
     <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">- 아이콘 제작자: Freepik - Flaticon</a> -->
+    <!-- <a href="https://www.flaticon.com/free-icons/no-data" title="no-data icons">No-data icons created by Design Circle - Flaticon</a> -->
+    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="편집 도구 아이콘">편집 도구 아이콘 제작자: HideMaru - Flaticon</a> -->
   </div>
 </template>
 

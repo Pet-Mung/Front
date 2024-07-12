@@ -28,7 +28,7 @@ const addCart = async (productId, count) => {
 // 장바구니 삭제 api 호출
 const deleteCart = async (basket_id) => {
   try {
-    const response = await API.delete(`basket/basket_id=${basket_id}`);
+    const response = await API.delete(`basket?basket_id=${basket_id}`);
     return response.data;
   } catch (error) {
     console.error(error);

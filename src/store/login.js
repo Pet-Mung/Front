@@ -21,6 +21,7 @@ export default {
                 //로그인 만료시간 30분으로 설정
                 const ttl = 1800000;
                 const expire = now.getTime() + ttl;
+                console.log(result);
                 const userInfoObj = {
                   userId : result.access_token,
                   type : result.token_type,
@@ -29,7 +30,6 @@ export default {
                   expire : expire,
                   
                 }
-
                 window.sessionStorage.setItem('userInfoObj',JSON.stringify(userInfoObj));
                 context.commit('setLoginStatus',true);
               }

@@ -1,10 +1,21 @@
 @import "./mixin";
 // listView
+.no_data{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  height: 30vh;
+  img{
+    width: 50px;
+  }
+}
 .list_style {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4열 그리드 */
   gap: 20px;
   width: 100%;
+
   .list_content {
     display: flex;
     flex-direction: column;

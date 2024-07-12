@@ -11,6 +11,9 @@
           <button class="pd-10 fs-15 bx-shadow" @click="router.push('profile')">
             내정보 수정
           </button>
+          <button class="pd-10 fs-15 bx-shadow del_btn" @click="deleteUserInfo">
+            회원 탈퇴
+          </button>
         </div>
       </div>
     </div>
@@ -85,7 +88,8 @@ import { computed, onBeforeMount, ref } from "vue";
 import SliderView from "@/components/public/SliderView.vue";
 import { useRouter } from "vue-router";
 import { getItemWithExpireTime } from "@/utils/common";
-
+import { useStore } from "vuex";
+let store =useStore();
 let router = useRouter();
 let data = ref({});
 // slider type
@@ -152,11 +156,20 @@ const user_idx = computed(() => {
 const getUserInfo = async () => {
   try {
     const result = await api.getOnlyUser(user_idx.value);
+    // console.log(user_idx.value);
     data.value = result.data[0];
   } catch (error) {
     console.error(error);
   }
 };
+const deleteUserInfo = () => {
+  if (confirm("정말 삭제하시겠습니까?") ==true){
+    store.dispatch('common/delUserInfo',user_idx.value);
+    store.commit('login/setLoginStatus',false);
+    window.sessionStorage.clear();
+    router.push('/');
+  }
+}
 
 onBeforeMount(() => {
   getUserInfo();
