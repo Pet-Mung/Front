@@ -16,7 +16,7 @@
 <script setup>
 import productApi from "@/api/productApi";
 import { computed, onMounted, onUpdated, ref, watch } from "vue";
-import ListView from "@/components/public/ListView.vue";
+import ListView from "@/components/comn/ListView.vue";
 import { useStore } from "vuex";
 const store = useStore();
 let selectTab = ref(1);

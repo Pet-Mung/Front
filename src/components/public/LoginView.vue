@@ -1,11 +1,11 @@
 <template>
   <div class="user_wrap">
     <div class="int-area">
-      <input type="text" id="username" required v-model="info.username" autocomplete="off"/>
+      <input type="text" id="username" required v-model.trim="info.username" autocomplete="off"/>
       <label for="username">아이디</label>
     </div>
     <div class="int-area">
-      <input type="password" id="userPw" required v-model="info.password" />
+      <input type="password" id="userPw" required v-model.trim="info.password" />
       <label for="userPw">비밀번호</label>
     </div>
     <div class="btn-area">

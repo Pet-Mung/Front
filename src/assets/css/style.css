@@ -161,6 +161,9 @@ td .edit_icon{
   width: 18px;
   cursor: pointer;
 }
+.table tbody tr{
+  border-bottom: 1px solid #ececec;
+}
 .table tbody tr:hover {
   background-color: #ffefe9;
 }

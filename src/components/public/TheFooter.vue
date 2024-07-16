@@ -54,13 +54,11 @@
     <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">- 아이콘 제작자: Freepik - Flaticon</a> -->
     <!-- <a href="https://www.flaticon.com/free-icons/no-data" title="no-data icons">No-data icons created by Design Circle - Flaticon</a> -->
     <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="편집 도구 아이콘">편집 도구 아이콘 제작자: HideMaru - Flaticon</a> -->
+    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="자극 아이콘">자극 아이콘 제작자: small.smiles - Flaticon</a> -->
+    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">- 아이콘 제작자: Freepik - Flaticon</a> -->
   </div>
 </template>
 
-<script setup>
+<script setup></script>
 
-</script>
-
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

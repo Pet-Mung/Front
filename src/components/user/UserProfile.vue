@@ -3,18 +3,18 @@
     <!-- email -->
     <div class="user_input">
       <label for="userEmail">이메일</label>
-      <input type="text" id="userEmail" v-model="info.email" />
+      <input type="text" id="userEmail" v-model.trim="info.email" />
     </div>
 
     <!-- name -->
     <div class="user_input">
       <label for="userName">아이디</label>
-      <input type="text" id="userName" v-model="info.user_name" />
+      <input type="text" id="userName" v-model.trim="info.user_name" />
     </div>
     <!-- name -->
     <div class="user_input">
       <label for="userPhone">핸드폰 번호</label>
-      <input type="text" id="userPhone" v-model="info.phone_number" />
+      <input type="text" id="userPhone" v-model.trim="info.phone_number" />
     </div>
     <!-- name -->
     <div class="input_addr">
@@ -23,7 +23,7 @@
         <input
           type="text"
           name="zoneCode"
-          v-model="zonecode"
+          v-model.trim="zonecode"
           readonly
           @mousedown="$event.preventDefault()"
           @click="addressSearch"
@@ -124,7 +124,6 @@ const user_idx = computed(() => {
     return getItemWithExpireTime("userInfoObj")?.user_idx;
   }
 });
-
 // user 정보 조회 api 호출
 const getUserInfo = async () => {
   try {
@@ -145,6 +144,9 @@ const getUserInfo = async () => {
 // user 정보 수정 api 호출
 const putUserInfo = async () => {
   try {
+    if(info.address == undefined) info.address = '';
+    if(info.detail_address == undefined) info.detail_address = '';
+    if(info.phone_number == undefined) info.address = '';
     const result = await api.putOnlyUser(user_idx.value, info);
     if (result.status == "200") {
       alert(result.detail);
@@ -187,13 +189,12 @@ const modifyBtn = () => {
     originInfo.user_name == info.user_name &&
     originInfo.email == info.email &&
     originInfo.phone_number == info.phone_number &&
-    originInfo.address == info.address &&
-    originInfo.detail_address == info.detail_address
+    originInfo.address?.split("&")[0] == info.address &&
+    originInfo.address?.split("&")[1] == info.detail_address
     // originInfo.is_admin == info.is_admin 
   ) {
     modifyBool = false;
   } else modifyBool = true;
-
   if (modifyBool) {
     // 이메일, 아이디 필수값
     isEmailCheck();

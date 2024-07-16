@@ -25,11 +25,11 @@
       <div class="pdt_select">
         <div class="pdt_input">
           <label for="price">가격</label>
-          <input type="number" id="price" v-model="product.price" required />
+          <input type="number" id="price" v-model.trim="product.price" required />
         </div>
         <div class="pdt_input">
           <label for="count">개수</label>
-          <input type="number" id="count" v-model="product.count" required />
+          <input type="number" id="count" v-model.trim="product.count" required />
         </div>
       </div>
       <div class="pdt_input">

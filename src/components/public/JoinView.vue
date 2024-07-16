@@ -1,12 +1,14 @@
 <template>
-  <div class="user_wrap">
+  <JoinSelect v-if="isJoinSelect == false" @callFn="callFn" />
+
+  <div class="user_wrap" v-if="isJoinSelect == true">
     <!-- email -->
     <div class="user_input">
       <label for="userEmail">이메일</label>
       <input
         type="text"
         id="userEmail"
-        v-model="info.email"
+        v-model.trim="info.email"
         @keyup.enter="isEmailCheck"
       />
       <button
@@ -25,7 +27,7 @@
         <input
           type="text"
           id="userName"
-          v-model="info.username"
+          v-model.trim="info.username"
           @keyup.enter="isNameCheck"
         />
         <button
@@ -46,7 +48,7 @@
           type="password"
           @keyup="pwdCheck"
           id="userPw"
-          v-model="info.password"
+          v-model.trim="info.password"
         />
       </div>
     </transition>
@@ -58,7 +60,7 @@
           @keyup="pwdCheck"
           @keyup.enter="isPwCheck"
           id="userPwChk"
-          v-model="info.password_check"
+          v-model.trim="info.password_check"
         />
         <img
           v-if="isInput"
@@ -83,11 +85,11 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, toRef } from "vue";
+import { reactive, toRef, ref } from "vue";
 import api from "@/api/userApi.js";
 import { emailCheck, nameCheck, passwordCheck } from "@/utils/common.js";
 import { useRouter } from "vue-router";
-
+import JoinSelect from "./sub/JoinSelect.vue";
 let router = useRouter();
 
 let isCheck = reactive({
@@ -96,6 +98,7 @@ let isCheck = reactive({
   isNm: false,
   isEm: false,
 });
+let isJoinSelect = ref(false);
 let isInput = toRef(false);
 let chkPw = toRef(false);
 let info = reactive({
@@ -104,8 +107,7 @@ let info = reactive({
   username: "",
   email: "",
 });
-onMounted(() => {});
-
+// 회원가입 api 호출
 const createUser = async (info) => {
   try {
     const result = await api.joinUser(info);
@@ -116,6 +118,11 @@ const createUser = async (info) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+//회원가입 flag 선택했을 때
+const callFn = (flagBool) => {
+  if (flagBool) isJoinSelect.value = true;
 };
 
 // 이메일 확인

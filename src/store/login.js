@@ -5,12 +5,18 @@ export default {
     state(){
         return{
             loginSuccess : false,
+            // flag 0 = 판매자, flag 1 = 구매자
+            joinFlag : 1,
         }
     },
     mutations: {
         setLoginStatus(state,payload){
             state.loginSuccess = payload;
         },
+        setJoinFlag(state,payload){
+          state.joinFlag = payload;
+          console.log(state.joinFlag);
+      },
     },
     actions : {
         async getLoginUser (context,info) {
