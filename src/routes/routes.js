@@ -25,6 +25,7 @@ import AdminDashboard from "@/components/admin/AdminDashboard.vue";
 import ManageOrders from "@/components/admin/ManageOrders.vue";
 import ManageProducts from "@/components/admin/ManageProducts.vue";
 import ManageUsers from "@/components/admin/ManageUsers.vue";
+import ProductItem from "@/components/admin/sub/ProductItem.vue";
 
 const routes = [
   //처음 페이지 접속시 로딩페이지
@@ -83,7 +84,13 @@ const routes = [
     component: AdminDashboard,
     children: [
       { path: "orders", component: ManageOrders },
-      { path: "products", component: ManageProducts },
+      {
+        path: "products",
+        children: [
+          { path: "", component: ManageProducts },
+          { path: ":id", component: ProductItem },
+        ],
+      },
       {
         path: "users",
         // component: ManageUsers,

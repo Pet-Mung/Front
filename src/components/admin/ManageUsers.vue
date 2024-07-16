@@ -23,7 +23,7 @@
           <td>{{ userInfo.email}}</td>
           <td>{{ userInfo.created_at.split("T")[0]}}</td>
           <td>{{ userInfo.updated_at.split("T")[0]}}</td>
-          <td>{{ userInfo.address == null ? '-' : userInfo.address.split(" ")[0]}}</td>
+          <td>{{ (userInfo.address == null || userInfo.address == '&') ? '-' : userInfo.address.split("&")[0]}}</td>
           <td>{{ userInfo.phone_number == 'None' ? '-' : userInfo.phone_number}}</td>
           <td>{{ userInfo.is_active ? 'YES' : 'NO'}}</td>
           <td @click="modifyInfo(userInfo.id)"><img class="edit_icon" src="@/assets/img/edit_icon.png" alt="수정 버튼"></td>
@@ -59,7 +59,7 @@ const modifyInfo = (id) => {
 }
 const deleteInfo = (id) => {
   if (confirm("정말 삭제하시겠습니까?") ==true){
-    store.dispatch('common/delUserInfo',id);
+    store.dispatch('user/delUserInfo',id);
     router.go();
   }
 }

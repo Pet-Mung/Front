@@ -31,13 +31,11 @@ const postProduct = async (productData) => {
 };
 
 // 상품 수정 api 호출
-const editProduct = async (product_id, formData) => {
+const editProduct = async (product_id, productData) => {
+  console.log(product_id)
+  console.log(productData)
   try {
-    const response = await API.put(`product/${product_id}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await API.put(`product/${product_id}`, productData);
     return response.data;
   } catch (error) {
     console.error(error);

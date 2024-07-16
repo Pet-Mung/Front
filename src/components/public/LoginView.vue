@@ -1,11 +1,11 @@
 <template>
   <div class="user_wrap">
     <div class="int-area">
-      <input type="text" id="username" required v-model="info.username" autocomplete="off"/>
+      <input type="text" id="username" required v-model.trim="info.username" autocomplete="off"/>
       <label for="username">아이디</label>
     </div>
     <div class="int-area">
-      <input type="password" id="userPw" required v-model="info.password" />
+      <input type="password" id="userPw" required v-model.trim="info.password" />
       <label for="userPw">비밀번호</label>
     </div>
     <div class="btn-area">
@@ -43,7 +43,7 @@ const loginSuccess = computed(()=>{
   return store.state.login.loginSuccess;
 });
 const isModalOpen = computed(()=>{
-  return store.state.common.isModalOpen;
+  return store.state.user.isModalOpen;
 });
 
 if(loginSuccess.value){
@@ -69,7 +69,7 @@ const loginCheck = async () => {
 
 // isOpenModal state 관리
 const openModal = () => {
-  store.commit('common/setIsModalOpen',true);
+  store.commit('user/setIsModalOpen',true);
 }
 
 </script>

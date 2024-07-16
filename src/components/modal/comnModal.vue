@@ -26,7 +26,7 @@ const body =document.querySelector('body');
 body.style.overflow = 'hidden';
 const closeModal = () => {
   body.style.overflow = 'auto';
-  store.commit('common/setIsModalOpen',false);
+  store.commit('user/setIsModalOpen',false);
 }
 
 </script>

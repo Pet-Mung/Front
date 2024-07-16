@@ -20,10 +20,10 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
 const adminTab = computed(() => {
-  return store.state.common.adminTab;
+  return store.state.user.adminTab;
 });
 const selectAdminTab = (num) => {
-  store.commit("common/setAdminTab", num);
+  store.commit("user/setAdminTab", num);
 };
 </script>
 
