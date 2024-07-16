@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="userInfo in usersInfo" :key="userInfo">
+        <tr v-for="userInfo in displayedPosts" :key="userInfo">
           <td>{{ userInfo.id}}</td>
           <td>{{ userInfo.user_name}}</td>
           <td>{{ userInfo.email}}</td>
@@ -32,19 +32,44 @@
       </tbody>
     </table>
   </div>
+  <PagingView
+    :currentPage="currentPage"
+    :totalPages="totalPages"
+    :isEmpty="isEmpty"
+    @changePage="changePage"
+  />
 </template>
 
 <script setup>
 
 // user 정보 조회 api 호출
-import {ref} from 'vue';
 import api from "@/api/userApi.js";
+import PagingView from "@/components/public/PagingView.vue";
+import { ref ,computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
 const store = useStore();
 const router = useRouter();
 let usersInfo = ref([]);
+
+let currentPage = ref(1); //현재 페이지 번호
+let postsperPage = 5; //한 페이지에 보여줄 게시글 갯수
+let isEmpty = ref(false); //데이터 빈 값 여부
+const totalPages = computed(()=>{ //총 페이지 수
+  return Math.ceil(usersInfo.value.length / postsperPage);
+})
+
+// 현재 페이지에 해당하는 게시글 목록을 반환
+const displayedPosts = computed(()=>{
+    const startIndex = (currentPage.value - 1) * postsperPage;
+  const endIndex = startIndex + postsperPage;
+  if (!usersInfo.value) return [];
+  else return usersInfo.value.slice(startIndex, endIndex);
+})
+
+
+// 모든 회원 정보 전체 api 호출
 const getUsersInfo = async () => {
   try {
     const result = await api.getUsers();
@@ -53,17 +78,31 @@ const getUsersInfo = async () => {
     console.error(error);
   }
 };
+
+//회원정보 수정 버튼 이벤트리스너
 const modifyInfo = (id) => {
   window.sessionStorage.setItem('click_idx',id);
   router.push('users/profile');
 }
+
+//회원정보 삭제 버튼 이벤트리스너
 const deleteInfo = (id) => {
   if (confirm("정말 삭제하시겠습니까?") ==true){
     store.dispatch('user/delUserInfo',id);
     router.go();
   }
 }
+
+//페이지 변경
+const changePage = (str) =>{
+  if(str == 'prev') currentPage.value--;
+  else if(str == 'next') currentPage.value++;
+  else currentPage.value = str;
+}
+
+// created
 getUsersInfo();
+
 </script>
 
 <style lang="scss" scoped></style>

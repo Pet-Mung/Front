@@ -73,7 +73,7 @@ import { reactive, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const prouct_id = computed(() => {
+const product_id = computed(() => {
   return window.sessionStorage.getItem("click_pdt_idx");
 });
 const imagePreview = ref(null);
@@ -86,13 +86,13 @@ const product = reactive({
   count: "",
   content: "",
 });
-const ctgy = ref([]);
+const ctgy = ref([]); 
 const animalCtgy = ref([]);
 
 // 개별 상품 get api 호출
 const getProduct = async () => {
   try {
-    const result = await productApi.viewIndividualProduct(prouct_id.value);
+    const result = await productApi.viewIndividualProduct(product_id.value);
     product.name = result.name;
     product.animalCategory = result.animal_category;
     product.category = result.category;
@@ -112,7 +112,7 @@ const getProduct = async () => {
     console.error(error);
   }
 };
-getProduct();
+
 // 용품 카테고리 api 호출
 const getCtgy = async () => {
   let result = await productApi.getCategory();
@@ -148,7 +148,6 @@ const readInputFile = (e) => {
     reader.readAsDataURL(file);
   });
 };
-
 const uploadProduct = async () => {
   if (imageUrls.value.length === 0) {
     alert("업로드할 파일을 선택하세요.");
@@ -156,7 +155,7 @@ const uploadProduct = async () => {
   }
   try {
     // 수정인 경우
-    if (prouct_id.value) {
+    if (product_id.value) {
       const updatedData = {
         updated_product: {
           name: product.name,
@@ -168,7 +167,7 @@ const uploadProduct = async () => {
           image: imageUrls.value,
         },
       };
-      const result = await productApi.editProduct(prouct_id.value, updatedData);
+      const result = await productApi.editProduct(product_id.value, updatedData);
       if (result) {
         alert("수정완료");
         router.push("/admin/products");
@@ -199,4 +198,5 @@ const uploadProduct = async () => {
 // created
 getCtgy();
 getAniCtgy();
+if(product_id.value) getProduct();
 </script>

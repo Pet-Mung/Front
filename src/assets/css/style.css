@@ -477,6 +477,11 @@ input[type="radio"]:disabled + label {
 }
 .page-item.previous,
 .page-item.next {
-  background-color: #8d8d8d;
+  background-color: #b7b7b7;
+  color: #fff;
+}
+.page-item.previous:hover,
+.page-item.next:hover {
+  background-color: #464646;
   color: #fff;
 }

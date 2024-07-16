@@ -107,16 +107,5 @@ const changePage = (str) =>{
 
 // created
 getAllProduct();
-</script>
 
-<style lang="scss" scoped>
-.btn_area_r {
-  width: 1000px;
-  display: flex;
-  justify-content: flex-end;
-  .confirm_btn{
-    width : 100px;
-    height: 50px;
-  }
-}
-</style>
+</script>
