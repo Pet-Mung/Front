@@ -26,7 +26,7 @@
           />장바구니</router-link
         >
       </li>
-      <li v-if="loginSuccess" :class="{active : subPath =='mypage'}">
+      <li v-if="loginSuccess" :class="{active : subPath =='mypage' || subPath =='profile'}">
         <router-link to="/user/mypage"
           ><img
             src="@/assets/img/mypage.png"
