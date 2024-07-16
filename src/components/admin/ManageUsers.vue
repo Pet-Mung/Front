@@ -59,7 +59,7 @@ const modifyInfo = (id) => {
 }
 const deleteInfo = (id) => {
   if (confirm("정말 삭제하시겠습니까?") ==true){
-    store.dispatch('common/delUserInfo',id);
+    store.dispatch('user/delUserInfo',id);
     router.go();
   }
 }

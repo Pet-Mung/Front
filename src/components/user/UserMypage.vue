@@ -164,7 +164,7 @@ const getUserInfo = async () => {
 };
 const deleteUserInfo = () => {
   if (confirm("정말 삭제하시겠습니까?") ==true){
-    store.dispatch('common/delUserInfo',user_idx.value);
+    store.dispatch('user/delUserInfo',user_idx.value);
     store.commit('login/setLoginStatus',false);
     window.sessionStorage.clear();
     router.push('/');

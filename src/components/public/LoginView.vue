@@ -43,7 +43,7 @@ const loginSuccess = computed(()=>{
   return store.state.login.loginSuccess;
 });
 const isModalOpen = computed(()=>{
-  return store.state.common.isModalOpen;
+  return store.state.user.isModalOpen;
 });
 
 if(loginSuccess.value){
@@ -69,7 +69,7 @@ const loginCheck = async () => {
 
 // isOpenModal state 관리
 const openModal = () => {
-  store.commit('common/setIsModalOpen',true);
+  store.commit('user/setIsModalOpen',true);
 }
 
 </script>

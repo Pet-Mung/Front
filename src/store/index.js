@@ -1,9 +1,9 @@
-import common from "./common";
+import user from "./user";
 import login from "./login";
 import { createStore } from "vuex";
 const store = createStore({
     modules : {
-        common,
+        user,
         login,
     }
 });

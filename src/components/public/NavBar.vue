@@ -63,7 +63,7 @@ if (userId.value != "" && userId.value != undefined) {
 }
 let ctgy = ref([]);
 const categoryName = computed(() => {
-  return store.state.common.category_name;
+  return store.state.user.category_name;
 });
 
 // 용품 카테고리 api 호출
@@ -74,7 +74,7 @@ const getCtgy = async () => {
 // 선택한 카테고리 이름 store 저장
 const selectCtgy = (ctgyName,idx ) => {
   idx +=1;
-  store.commit("common/setCtgyName", ctgyName);
+  store.commit("user/setCtgyName", ctgyName);
   
   if(idx) router.push(`/shop/products/${idx}`);
   else router.push(`/shop/products`);

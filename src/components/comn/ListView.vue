@@ -52,7 +52,7 @@ const isLogin = computed(() => {
   else return false;
 });
 const basketInfo = computed(() => {
-  return store.state.common.basketInfo;
+  return store.state.user.basketInfo;
 });
 const user_idx = computed(() => {
     return getItemWithExpireTime("userInfoObj")?.user_idx;
@@ -60,7 +60,7 @@ const user_idx = computed(() => {
 // const arr = ref([...props.list]);
 // 장바구니 조회 api 호출
 const getBasket = async () => {
-  await store.dispatch("common/getBasketView");
+  await store.dispatch("user/getBasketView");
   // if (basketInfo.value.length >= 1) {
   //   console.log('aa')
   //   basketInfo.value.forEach((basket) => {
@@ -82,7 +82,7 @@ const addCartBtn = async (item) => {
     productId: item.id,
     count: count,
   };
-  await store.dispatch("common/addBasket", addBasketinfo);
+  await store.dispatch("user/addBasket", addBasketinfo);
   item.isCart = true;
   // getBasket();
 };
@@ -96,7 +96,7 @@ const delCartBtn = (pdt) => {
   // nameArr.forEach((item) => {
   //   store.dispatch("common/delBasket", item.id);
   // });
-  store.dispatch("common/delBasket", nameArr.id);
+  store.dispatch("user/delBasket", nameArr.id);
   pdt.isCart = false;
   // getBasket();
 };
