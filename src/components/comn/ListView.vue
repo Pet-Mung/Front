@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="no_data mb-30" v-if="props.list.length == 0 ">
+    <ul class="mb-30" v-if="props.list.length == 0 ">
       <li class="no_data" > 
         <img src="@/assets/img/nodata_icon.png" alt="no_data" />
         <p>데이터가 없습니다.</p>

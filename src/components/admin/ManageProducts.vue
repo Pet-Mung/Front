@@ -18,6 +18,10 @@
         </tr>
       </thead>
       <tbody>
+        <tr class="no_data" v-if="displayedPosts.length == 0">
+          <img src="@/assets/img/nodata_icon.png" alt="no_data" />
+          <p>데이터가 없습니다.</p>
+        </tr>
         <tr v-for="product in displayedPosts" :key="product.id">
           <td>{{ product.id }}</td>
           <td>{{ product.user_name }}</td>
@@ -63,17 +67,18 @@ let list = ref([]);
 let currentPage = ref(1); //현재 페이지 번호
 let postsperPage = 5; //한 페이지에 보여줄 게시글 갯수
 let isEmpty = ref(false); //데이터 빈 값 여부
-const totalPages = computed(()=>{ //총 페이지 수
+const totalPages = computed(() => {
+  //총 페이지 수
   return Math.ceil(list.value.length / postsperPage);
-})
+});
 
 // 현재 페이지에 해당하는 게시글 목록을 반환
-const displayedPosts = computed(()=>{
-    const startIndex = (currentPage.value - 1) * postsperPage;
+const displayedPosts = computed(() => {
+  const startIndex = (currentPage.value - 1) * postsperPage;
   const endIndex = startIndex + postsperPage;
   if (!list.value) return [];
   else return list.value.slice(startIndex, endIndex);
-})
+});
 
 //상품 정보 전체 조회 api 호출
 const getAllProduct = async () => {
@@ -99,13 +104,12 @@ const modifyProduct = (id) => {
 };
 
 //페이지 변경
-const changePage = (str) =>{
-  if(str == 'prev') currentPage.value--;
-  else if(str == 'next') currentPage.value++;
+const changePage = (str) => {
+  if (str == "prev") currentPage.value--;
+  else if (str == "next") currentPage.value++;
   else currentPage.value = str;
-}
+};
 
 // created
 getAllProduct();
-
 </script>

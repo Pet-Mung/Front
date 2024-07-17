@@ -20,7 +20,7 @@
     <div class="pd-30">
       <div class="cont_area">
         <div class="title_s pd-10">
-          <img src="@/assets/img/cart_icon.png" alt="장바구니" />
+          <img src="@/assets/img/add_cart.png" alt="장바구니" />
           <h4 class="fs-18 mlr-10">장바구니</h4>
           <button @click="router.push('basket')" class="fb">더 보기 +</button>
         </div>

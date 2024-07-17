@@ -29,33 +29,13 @@
         <li>
           <ul>
             <li>Support</li>
-            <li><a href="#">매장찾기</a></li>
+            <li><router-link to="/icons">아이콘 저작권</router-link></li>
             <li><a href="#">본사오시는길</a></li>
             <li><a href="#">고객지원</a></li>
           </ul>
         </li>
       </ul>
     </footer>
-    <!-- credit section -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="가축 아이콘">가축 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="맑은 아이콘">맑은 아이콘 제작자: Creatype - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/-o" title="편지 o 아이콘">편지 o 아이콘 제작자: IconsBox - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="개 아이콘">개 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="돌보는 사람 아이콘">돌보는 사람 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="돌보는 사람 아이콘">돌보는 사람 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘 제작자: Vector Squad - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘 제작자: srip - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">- 아이콘 제작자: fjstudio - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title=" 아이콘"> 아이콘 제작자: surang - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="대부분 아이콘">대부분 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="대부분 아이콘">대부분 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="개 아이콘">개 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="쇼핑 카트 아이콘">쇼핑 카트 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">- 아이콘 제작자: Freepik - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/free-icons/no-data" title="no-data icons">No-data icons created by Design Circle - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="편집 도구 아이콘">편집 도구 아이콘 제작자: HideMaru - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/" title="자극 아이콘">자극 아이콘 제작자: small.smiles - Flaticon</a> -->
-    <!-- <a href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">- 아이콘 제작자: Freepik - Flaticon</a> -->
   </div>
 </template>
 
