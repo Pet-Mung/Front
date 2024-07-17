@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="pd-20 fs-30">product detail</h3>
+    <h3 class="pd-20 fs-20">상품 상세정보</h3>
     <div class="flex_center row mb-30">
       <Slider :flag="flag" :sliderData="product.image" />
       <div class="detail_cont">
@@ -52,15 +52,15 @@
         <li>상품Q&A</li>
         <li>판매자 정보</li>
       </ul>
-      <div class="detail_info_wrap">
-        <p>{{ product.content }}</p>
+      <div class="detail_info_wrap ql-editor" >
+        <div v-html="product.content"></div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
 import productApi from "@/api/productApi";
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import Slider from "@/components/comn/SliderView.vue";
 import { commonNumber } from "@/utils/common";
 const productId = computed(() => {
@@ -79,15 +79,15 @@ let selectTab = ref(1);
 const getOnlyProduct = async () => {
   try {
     const result = await productApi.viewIndividualProduct(productId.value);
-    // result.content = result.content.replaceAll('""," "')
     product.value = result;
   } catch (error) {
     console.error(error);
   }
 };
-onMounted(() => {
-  getOnlyProduct();
-});
+
+//created
+getOnlyProduct();
+
 </script>
 
 <style lang="scss" scoped>

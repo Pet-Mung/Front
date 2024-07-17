@@ -27,3 +27,14 @@
     @content;
   }
 }
+
+@mixin nav_mo {
+  @media (max-width: #{$breakpoint-nav - 1px}) {
+    @content;
+  }
+}
+@mixin nav_pc {
+  @media (min-width: #{$breakpoint-nav}) {
+    @content;
+  }
+}

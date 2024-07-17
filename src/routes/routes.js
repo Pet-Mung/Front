@@ -27,6 +27,8 @@ import ManageProducts from "@/components/admin/ManageProducts.vue";
 import ManageUsers from "@/components/admin/ManageUsers.vue";
 import ProductItem from "@/components/admin/sub/ProductItem.vue";
 
+//icon
+import iconView from "@/components/public/sub/iconView.vue";
 const routes = [
   //처음 페이지 접속시 로딩페이지
   { path: "/", redirect: "/main" },
@@ -100,6 +102,12 @@ const routes = [
         ],
       },
     ],
+  },
+  {
+    path: "/icons",
+    name: "iconView",
+    component: iconView,
+    props: true,
   },
 ];
 

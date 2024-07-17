@@ -1,24 +1,59 @@
 <template>
-  <nav>
+  <div :class="isNav ? 'nav_btn active' : 'nav_btn'" @click="isNav = !isNav">
+    <span class="line line1"></span>
+    <span class="line line2"></span>
+    <span class="line line3"></span>
+  </div>
+  <nav :class="isNav ? 'nav active' : 'nav'">
     <ul class="nav_bar nv_left">
-      <li @click="selectCtgy('ALL')" :class="{active : categoryName =='ALL'&& mainPath == 'shop'}" >
+      <li
+        @click="selectCtgy('ALL')"
+        :class="{ active: categoryName == 'ALL' && mainPath == 'shop' }"
+      >
         ALL
       </li>
-      <li v-for="(item,idx) in ctgy" :key="item" @click="selectCtgy(item,idx)" :class="{active : categoryName == item && mainPath == 'shop'}">
+      <li
+        v-for="(item, idx) in ctgy"
+        :key="item"
+        @click="selectCtgy(item, idx)"
+        :class="{ active: categoryName == item && mainPath == 'shop' }"
+      >
         {{ item }}
       </li>
     </ul>
     <ul class="nav_bar nv_right">
-      <li v-if="!loginSuccess" :class="{active : mainPath =='join'}">
+      <li
+        v-if="!loginSuccess"
+        :class="{ active: mainPath == 'join' }"
+        @click="isNav = false"
+      >
         <router-link to="/join">회원가입</router-link>
       </li>
-      <li v-if="!loginSuccess" :class="{active : mainPath =='login'}">
-        <router-link to="/login">로그인</router-link>
+      <li
+        v-if="!loginSuccess"
+        :class="{ active: mainPath == 'login' }"
+        @click="isNav = false"
+      >
+        <router-link to="/login"
+          ><img
+            src="@/assets/img/power_icon.png"
+            class="sm_icon"
+          />로그인</router-link
+        >
       </li>
-      <li v-if="loginSuccess">
-        <router-link to="/login">로그아웃</router-link>
+      <li v-if="loginSuccess" @click="isNav = false">
+        <router-link to="/login"
+          ><img
+            src="@/assets/img/power_icon.png"
+            class="sm_icon"
+          />로그아웃</router-link
+        >
       </li>
-      <li v-if="loginSuccess" :class="{active : subPath =='basket'}">
+      <li
+        v-if="loginSuccess"
+        :class="{ active: subPath == 'basket' }"
+        @click="isNav = false"
+      >
         <router-link to="/user/basket"
           ><img
             src="@/assets/img/cart.png"
@@ -26,12 +61,28 @@
           />장바구니</router-link
         >
       </li>
-      <li v-if="loginSuccess" :class="{active : subPath =='mypage' || subPath =='profile'}">
+      <li
+        v-if="loginSuccess"
+        :class="{ active: subPath == 'mypage' || subPath == 'profile' }"
+        @click="isNav = false"
+      >
         <router-link to="/user/mypage"
           ><img
             src="@/assets/img/mypage.png"
             class="sm_icon"
           />마이페이지</router-link
+        >
+      </li>
+      <li
+        v-if="loginSuccess"
+        :class="mainPath == 'admin' ? 'active txtlink' : 'txtlink'"
+        @click="isNav = false"
+      >
+        <router-link to="/admin/products"
+          ><img
+            src="@/assets/img/settings_icon.png"
+            class="sm_icon"
+          />설정</router-link
         >
       </li>
     </ul>
@@ -57,6 +108,7 @@ const subPath = computed(() => {
 const loginSuccess = computed(() => {
   return store.state.login.loginSuccess;
 });
+let isNav = ref(false);
 let userId = ref(getItemWithExpireTime("userInfoObj")?.userId);
 if (userId.value != "" && userId.value != undefined) {
   store.commit("login/setLoginStatus", true);
@@ -72,11 +124,12 @@ const getCtgy = async () => {
   ctgy.value = result;
 };
 // 선택한 카테고리 이름 store 저장
-const selectCtgy = (ctgyName,idx ) => {
-  idx +=1;
+const selectCtgy = (ctgyName, idx) => {
+  idx += 1;
   store.commit("user/setCtgyName", ctgyName);
-  
-  if(idx) router.push(`/shop/products/${idx}`);
+  isNav.value = false;
+
+  if (idx) router.push(`/shop/products/${idx}`);
   else router.push(`/shop/products`);
 };
 // created

@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="pdt_input">
-        <label for="image">이미지 첨부</label>
+        <label for="image">대표 이미지 첨부</label>
         <!-- <input type="text" id="image" required /> -->
         <div class="custom-file">
           <input id="customFile" type="file" @change="readInputFile" multiple />
@@ -58,8 +58,13 @@
       </div>
       <div class="pdt_input diff_input">
         <label for="content">상품 설명</label>
-        <textarea id="content" v-model="product.content" required></textarea>
       </div>
+      <quill-editor
+        :value="product.content"
+        :options="state.editorOption"
+        @change="onEditorChange($event)"
+      >
+      </quill-editor>
       <div class="flex_center">
         <button type="submit" class="btn_type_01">상품 등록하기</button>
       </div>
@@ -71,9 +76,8 @@
 import productApi from "@/api/productApi";
 import { reactive, ref, computed } from "vue";
 import { useRouter } from "vue-router";
-
 const router = useRouter();
-const prouct_id = computed(() => {
+const product_id = computed(() => {
   return window.sessionStorage.getItem("click_pdt_idx");
 });
 const imagePreview = ref(null);
@@ -89,10 +93,53 @@ const product = reactive({
 const ctgy = ref([]);
 const animalCtgy = ref([]);
 
+const state = reactive({
+  content: "",
+  _content: "",
+  editorOption: {
+    placeholder: "내용을 입력해주세요...",
+    modules: {
+      toolbar: [
+        ["bold", "italic", "underline", "strike"],
+        ["blockquote", "code-block"],
+        [{ header: 1 }, { header: 2 }],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ script: "sub" }, { script: "super" }],
+        [{ indent: "-1" }, { indent: "+1" }],
+        [{ direction: "rtl" }],
+        [{ size: ["small", false, "large", "huge"] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }], //style color:rgb
+        [{ font: [] }], //글꼴 class
+        [{ align: [] }],
+        ["clean"],
+        ["link", "image", "video"],
+      ],
+    },
+  },
+  disabled: false,
+});
+
+const onEditorChange = ({ quill, html, text }) => {
+  console.log("onEditorChange :", quill, html, text);
+  // state._content = html;
+  product.content = html;
+  console.log("ㅇㅇ", product.content);
+};
+// const onEditorFocus = (editor) => {
+//   console.log("onEditorFocus", editor);
+// };
+// const onEditorBlur = (editor) => {
+//   console.log("onEditorBlur", editor);
+// };
+// const onEditorReady = (editor) => {
+//   console.log("onEditorReady", editor);
+// };
+
 // 개별 상품 get api 호출
 const getProduct = async () => {
   try {
-    const result = await productApi.viewIndividualProduct(prouct_id.value);
+    const result = await productApi.viewIndividualProduct(product_id.value);
     product.name = result.name;
     product.animalCategory = result.animal_category;
     product.category = result.category;
@@ -112,7 +159,7 @@ const getProduct = async () => {
     console.error(error);
   }
 };
-getProduct();
+
 // 용품 카테고리 api 호출
 const getCtgy = async () => {
   let result = await productApi.getCategory();
@@ -148,7 +195,6 @@ const readInputFile = (e) => {
     reader.readAsDataURL(file);
   });
 };
-
 const uploadProduct = async () => {
   if (imageUrls.value.length === 0) {
     alert("업로드할 파일을 선택하세요.");
@@ -156,7 +202,7 @@ const uploadProduct = async () => {
   }
   try {
     // 수정인 경우
-    if (prouct_id.value) {
+    if (product_id.value) {
       const updatedData = {
         updated_product: {
           name: product.name,
@@ -168,7 +214,10 @@ const uploadProduct = async () => {
           image: imageUrls.value,
         },
       };
-      const result = await productApi.editProduct(prouct_id.value, updatedData);
+      const result = await productApi.editProduct(
+        product_id.value,
+        updatedData
+      );
       if (result) {
         alert("수정완료");
         router.push("/admin/products");
@@ -199,4 +248,10 @@ const uploadProduct = async () => {
 // created
 getCtgy();
 getAniCtgy();
+if (product_id.value) getProduct();
 </script>
+<style lang="scss" scoped>
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+  height: 400px;
+}
+</style>
