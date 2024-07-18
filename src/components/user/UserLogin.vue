@@ -14,7 +14,7 @@
     <div class="caption">
       <span @click="openModal">Forgot Password?</span>
     </div>
-    <ComnModal v-if="isModalOpen" modalName ="비밀번호 찾기" modalSize="small" :modalFlag = 1 />
+    <ModalComn v-if="isModalOpen" modalName ="비밀번호 찾기" modalSize="small" :modalFlag = 1 />
   </div>
 </template>
 
@@ -22,7 +22,7 @@
 import { computed, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import ComnModal from "@/components/modal/comnModal.vue"; 
+import ModalComn from "@/components/modal/ModalComn.vue"; 
 
 const router = useRouter();
 const store = useStore();

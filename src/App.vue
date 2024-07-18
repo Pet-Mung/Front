@@ -24,7 +24,9 @@ import { useRoute } from "vue-router";
 import { computed } from "vue";
 import API from "./api/apiAuth";
 import { getItemWithExpireTime } from "./utils/common";
+import { useStore } from "vuex";
 
+const store = useStore();
 const route = useRoute();
 const mainPath = computed(() => {
   return route.path.split("/")[1];
@@ -38,7 +40,15 @@ const userId = computed(()=>{
 const type = computed(()=>{
   return getItemWithExpireTime('userInfoObj')?.type;
 });
-API.setAuthToken(userId.value, type.value);
+const setLoginData = async () => {
+  API.setAuthToken(userId.value, type.value);
+}
+
+store.watch((state)=>{
+  if(state.login.loginSuccess){
+    setLoginData();
+  } 
+},setLoginData);
 </script>
 
 <style>

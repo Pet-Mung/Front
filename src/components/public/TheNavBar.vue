@@ -75,10 +75,10 @@
       </li>
       <li
         v-if="loginSuccess"
-        :class="mainPath == 'admin' ? 'active txtlink' : 'txtlink'"
+        :class="mainPath == 'manage' ? 'active txtlink' : 'txtlink'"
         @click="isNav = false"
       >
-        <router-link to="/admin/products"
+        <router-link to="/manage/products"
           ><img
             src="@/assets/img/settings_icon.png"
             class="sm_icon"
@@ -115,7 +115,7 @@ if (userId.value != "" && userId.value != undefined) {
 }
 let ctgy = ref([]);
 const categoryName = computed(() => {
-  return store.state.user.category_name;
+  return store.state.product.category_name;
 });
 
 // 용품 카테고리 api 호출
@@ -126,9 +126,8 @@ const getCtgy = async () => {
 // 선택한 카테고리 이름 store 저장
 const selectCtgy = (ctgyName, idx) => {
   idx += 1;
-  store.commit("user/setCtgyName", ctgyName);
+  store.commit("product/setCtgyName", ctgyName);
   isNav.value = false;
-
   if (idx) router.push(`/shop/products/${idx}`);
   else router.push(`/shop/products`);
 };

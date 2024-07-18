@@ -85,7 +85,7 @@
 <script setup>
 import api from "@/api/userApi.js";
 import { computed, onBeforeMount, ref } from "vue";
-import SliderView from "@/components/comn/SliderView.vue";
+import SliderView from "@/components/comn/ComnSlider.vue";
 import { useRouter } from "vue-router";
 import { getItemWithExpireTime } from "@/utils/common";
 import { useStore } from "vuex";

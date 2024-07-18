@@ -413,6 +413,63 @@ input[type="radio"]:disabled + label {
   color: #fff;
 }
 
+.tab_cat_04 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+}
+.tab_cat_04 li {
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+  background-color: rgb(224, 224, 224);
+  color :#636363;
+  border-right: 1px solid #fff;
+}
+.tab_cat_04 li.active {
+  font-weight: 700;
+  border : 1px solid #c0c0c0;
+  border-bottom :none;
+  background-color: var(--bs-body-bg);
+}
+
+.tab_cat_05 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+}
+.tab_cat_05 li {
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+  background-color: #ffffee;
+  color :#ff7b00;
+}
+.tab_cat_05 li.active {
+  background-color: #ff7b00;
+  color :#ffffee;
+}
+
+.tab_cat_06 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+}
+.tab_cat_06 li {
+  text-align: center;
+  padding: 10px 15px;
+  font-size: 15px;
+  color : #837d6f;
+  border-bottom: 1px solid #cfc5af;
+}
+.tab_cat_06 li.active {
+  font-weight: 700;
+  border-bottom :2px solid #ff9c08;
+  color : #ff9c08;
+}
 /* slider */
 .slider_area {
   width: 60%;

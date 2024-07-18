@@ -3,7 +3,7 @@
     <Carousel v-bind="setting" :breakpoints="breakpoints">
       <Slide class="" v-for="slide in props.sliderData" :key="slide">
         <div class="carousel__item">
-          <img :src="slide.image" :alt="slide.name" class="slide_img" />
+          <img :src="imageCheck(slide.image)" :alt="slide.name" class="slide_img" />
           <p>{{ slide.name }}</p>
           <p>{{ slide.count }}</p>
         </div>
@@ -24,7 +24,7 @@
       <!-- -->
       <Slide class="" v-for="(slide, idx) in props.sliderData" :key="slide">
         <div class="carousel__item">
-          <img :src="slide" :alt="`상품사진 ${idx}`" class="slide_img" />
+          <img :src="imageCheck(slide)" :alt="`상품사진 ${idx}`" class="slide_img" />
         </div>
       </Slide>
       <template #addons>
@@ -36,7 +36,8 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from "vue";
+import { imageCheck } from "@/utils/common";
+import { computed, defineProps, } from "vue";
 import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 
 import "vue3-carousel/dist/carousel.css";
