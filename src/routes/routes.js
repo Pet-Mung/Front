@@ -6,12 +6,12 @@ import UserView from "@/views/UserView.vue";
 import MainView from "@/components/MainView.vue";
 
 // public
-import LoginView from "@/components/public/LoginView.vue";
-import JoinView from "@/components/public/JoinView.vue";
+import LoginView from "@/components/user/UserLogin.vue";
+import JoinView from "@/components/user/UserJoin.vue";
 
 //shop
 import Product from "@/components/shop/ShopProduct.vue";
-import ProductDetail from "@/components/shop/ProductDetail.vue";
+import ProductDetail from "@/components/shop/ShopProductDetail.vue";
 
 // user
 import UserDelivery from "@/components/user/UserDelivery.vue";
@@ -21,14 +21,14 @@ import UserPurchase from "@/components/user/UserPurchase.vue";
 import UserBasket from "@/components/user/UserBasket.vue";
 
 // admin
-import AdminDashboard from "@/components/admin/AdminDashboard.vue";
-import ManageOrders from "@/components/admin/ManageOrders.vue";
-import ManageProducts from "@/components/admin/ManageProducts.vue";
-import ManageUsers from "@/components/admin/ManageUsers.vue";
-import ProductItem from "@/components/admin/sub/ProductItem.vue";
+import ManageDashboard from "@/components/manage/ManageDashboard.vue";
+import ManageOrders from "@/components/manage/ManageOrders.vue";
+import ManageProducts from "@/components/manage/ManageProducts.vue";
+import ManageUsers from "@/components/manage/ManageUsers.vue";
+import ProductItem from "@/components/manage/sub/ProductItem.vue";
 
 //icon
-import iconView from "@/components/public/sub/iconView.vue";
+import iconView from "@/components/public/TheIcon.vue";
 const routes = [
   //처음 페이지 접속시 로딩페이지
   { path: "/", redirect: "/main" },
@@ -82,8 +82,8 @@ const routes = [
   },
   //관리자 페이지
   {
-    path: "/admin",
-    component: AdminDashboard,
+    path: "/manage",
+    component: ManageDashboard,
     children: [
       { path: "orders", component: ManageOrders },
       {
@@ -109,6 +109,7 @@ const routes = [
     component: iconView,
     props: true,
   },
+  { path: "/:pathMatch(.*)*", redirect: "/main" },
 ];
 
 export default routes;

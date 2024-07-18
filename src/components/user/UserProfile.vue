@@ -52,14 +52,14 @@
         />
       </div>
     </div>
-    <div class="user_input radio_area" v-if="mainPath == 'admin'">
+    <div class="user_input radio_area" v-if="mainPath == 'manage'">
       <label>판매자 여부</label>
       <input type="radio" name="isSeller" id="se_true" value="se_true" />
       <label for="se_true">O</label>
       <input type="radio" name="isSeller" id="se_false" value="se_false" />
       <label for="se_false">X</label>
     </div>
-    <div class="user_input radio_area" v-if="mainPath == 'admin'">
+    <div class="user_input radio_area" v-if="mainPath == 'manage'">
       <label>관리자 여부</label>
       <input
         type="radio"
@@ -118,7 +118,7 @@ const mainPath = computed(() => {
   return route.path.split("/")[1];
 });
 const user_idx = computed(() => {
-  if (mainPath.value == "admin") {
+  if (mainPath.value == "manage") {
     return window.sessionStorage.getItem("click_idx");
   } else {
     return getItemWithExpireTime("userInfoObj")?.user_idx;
@@ -150,7 +150,7 @@ const putUserInfo = async () => {
     const result = await api.putOnlyUser(user_idx.value, info);
     if (result.status == "200") {
       alert(result.detail);
-      if (mainPath.value == "admin") router.push("/admin/users");
+      if (mainPath.value == "manage") router.push("/manage/users");
       else router.push("mypage");
     }
   } catch (error) {

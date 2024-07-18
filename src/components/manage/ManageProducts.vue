@@ -18,9 +18,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="no_data" v-if="displayedPosts.length == 0">
-          <img src="@/assets/img/nodata_icon.png" alt="no_data" />
-          <p>데이터가 없습니다.</p>
+        <tr v-if="displayedPosts.length == 0">
+          <td colspan="10" class="no_data_table">
+            <img src="@/assets/img/nodata_icon.png" alt="no_data" />
+            <p>데이터가 없습니다.</p>
+          </td>
         </tr>
         <tr v-for="product in displayedPosts" :key="product.id">
           <td>{{ product.id }}</td>
@@ -58,7 +60,7 @@
 <script setup>
 import productApi from "@/api/productApi";
 import { sortData } from "@/utils/common.js";
-import PagingView from "@/components/public/PagingView.vue";
+import PagingView from "@/components/comn/ComnPaging.vue";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 

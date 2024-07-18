@@ -1,11 +1,19 @@
 @import "./mixin";
 // listView
+.table-bordered .no_data_table{
+  font-weight: 700;
+  padding:100px 0;
+  img{
+    width: 100px;
+  }
+}
 .no_data{
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   height: 30vh;
+  
   img{
     width: 50px;
   }
@@ -21,8 +29,8 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    // border: 1px solid #f8ab37;
-    background-color: #f8ab37;
+     border: 1px solid #ebe6de;
+     background-color: #fff;
     border-radius: 8px;
     img {
       width: 100%;
@@ -34,16 +42,17 @@
     }
     .txt_wrap {
       width: 100%;
+      border-top: 1px solid #e1e1e1;
       .btn-cart {
         display: flex;
         align-items: center;
-        img {
-          width: 20px;
-        }
-        background-color: #000;
+        background-color: #ffb019;
         color: #fff;
         padding: 5px;
         border-radius: 5px;
+        img {
+          width: 20px;
+        }
       }
       .txt_flex {
         display: flex;
@@ -53,38 +62,6 @@
     }
   }
 }
-
-// 태블릿에서 노트북
-@include desktopToTablet {
-  .list_style {
-    grid-template-columns: repeat(5, 1fr); /* 5열 그리드 */
-  }
-}
-
-
-// 태블릿
-@include tablet {
-  .list_style {
-    grid-template-columns: repeat(4, 1fr); /* 3열 그리드 */
-  }
-}
-
-
-// 모바일에서 태블릿
-@include tabletToMobile  {
-  .list_style {
-    grid-template-columns: repeat(3, 1fr); /* 3열 그리드 */
-  }
-}
-
-
-// 모바일
-@include mobile  {
-  .list_style {
-    grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
-  }
-}
-
 
 
 // manamgeProducts
@@ -227,5 +204,27 @@ form.product-form {
 .detail_info_wrap{
   padding: 40px 20px;
   word-break: break-word;
+}
 
+
+// 태블릿에서 노트북
+@include desktopToTablet {
+  .list_style {
+    grid-template-columns: repeat(5, 1fr); /* 5열 그리드 */
+  }
+}
+
+
+// 태블릿
+@include tablet {
+  .list_style {
+    grid-template-columns: repeat(4, 1fr); /* 3열 그리드 */
+  }
+}
+
+//minwidth 1200px
+@include nav_pc{
+  .shop_wrap .tab_cat_06{
+    display: none;
+  }
 }

@@ -124,7 +124,6 @@ const onEditorChange = ({ quill, html, text }) => {
   console.log("onEditorChange :", quill, html, text);
   // state._content = html;
   product.content = html;
-  console.log("ㅇㅇ", product.content);
 };
 // const onEditorFocus = (editor) => {
 //   console.log("onEditorFocus", editor);
@@ -220,7 +219,7 @@ const uploadProduct = async () => {
       );
       if (result) {
         alert("수정완료");
-        router.push("/admin/products");
+        router.push("/manage/products");
       }
       // 생성인 경우
     } else {
@@ -238,7 +237,7 @@ const uploadProduct = async () => {
       const result = await productApi.postProduct(createData);
       if (result) {
         alert("등록완료");
-        router.push("/admin/products");
+        router.push("/manage/products");
       }
     }
   } catch (error) {

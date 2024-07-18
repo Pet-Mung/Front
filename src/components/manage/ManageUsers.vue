@@ -17,9 +17,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="no_data" v-if="displayedPosts.length == 0">
-          <img src="@/assets/img/nodata_icon.png" alt="no_data" />
-          <p>데이터가 없습니다.</p>
+        <tr v-if="displayedPosts.length == 0">
+          <td colspan="10" class="no_data_table">
+            <img src="@/assets/img/nodata_icon.png" alt="no_data" />
+            <p>데이터가 없습니다.</p>
+          </td>
         </tr>
         <tr v-for="userInfo in displayedPosts" :key="userInfo">
           <td>{{ userInfo.id }}</td>
@@ -67,7 +69,7 @@
 <script setup>
 // user 정보 조회 api 호출
 import api from "@/api/userApi.js";
-import PagingView from "@/components/public/PagingView.vue";
+import PagingView from "@/components/comn/ComnPaging.vue";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";

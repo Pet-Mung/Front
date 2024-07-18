@@ -89,7 +89,7 @@ import { reactive, toRef, ref } from "vue";
 import api from "@/api/userApi.js";
 import { emailCheck, nameCheck, passwordCheck } from "@/utils/common.js";
 import { useRouter } from "vue-router";
-import JoinSelect from "./sub/JoinSelect.vue";
+import JoinSelect from "./UserJoinSelect.vue";
 let router = useRouter();
 
 let isCheck = reactive({

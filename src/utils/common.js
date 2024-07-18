@@ -50,10 +50,9 @@ export function phoneCheck(phone_number) {
   else return false;
 }
 
-
 // 데이터 소팅하기
 // 만든날짜, 업데이트날짜를 기준으로 최근과 가까운 날짜 순
-export function sortData(data){
+export function sortData(data) {
   let sortArr = [];
   let pattern = /[\D]/gi;
   sortArr = data.sort((a, b) => {
@@ -74,4 +73,15 @@ export function sortData(data){
     else 0;
   });
   return sortArr;
+}
+
+export function imageCheck(imgSrc) {
+  const file_regex = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+  const base64_regex = /data:image\/(.+)[^"]/;
+  if (file_regex.test(imgSrc) || base64_regex.test(imgSrc)) {
+    return imgSrc;
+  }
+  else {
+    return require("@/assets/img/default.png");
+  }
 }

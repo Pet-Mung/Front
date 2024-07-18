@@ -10,7 +10,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import NavBar from './NavBar.vue';
+import NavBar from './TheNavBar.vue';
 
 const router = useRouter();
 </script>

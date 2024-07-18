@@ -61,7 +61,7 @@
 <script setup>
 import productApi from "@/api/productApi";
 import { computed, ref } from "vue";
-import Slider from "@/components/comn/SliderView.vue";
+import Slider from "@/components/comn/ComnSlider.vue";
 import { commonNumber } from "@/utils/common";
 const productId = computed(() => {
   return window.sessionStorage.getItem("productId");

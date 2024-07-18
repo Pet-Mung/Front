@@ -15,12 +15,12 @@
 <script setup>
 import { defineProps } from 'vue';
 import { useStore } from 'vuex';
-import findPw from '@/components/modal/sub/findPw.vue';
+import findPw from './sub/ModalFindPw.vue';
 const store = useStore();
 const props = defineProps({
-    modalFlag : {type : Number},
-    modalName : {type : String},
-    modalSize : {type : String},
+    modalFlag : { type : Number },
+    modalName : { type : String },
+    modalSize : { type : String },
 });
 const body =document.querySelector('body');
 body.style.overflow = 'hidden';

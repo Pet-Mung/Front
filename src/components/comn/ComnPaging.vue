@@ -20,7 +20,7 @@
       </li>
       <li
         class="page-item next"
-        v-if="props.currentPage != props.totalPages"
+        v-if="props.currentPage != props.totalPages && totalPages > 1"
         @click="emit('changePage', 'next')"
       >
         Next

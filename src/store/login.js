@@ -34,7 +34,6 @@ export default {
                   username : result.username,
                   user_idx : result.user_id,
                   expire : expire,
-                  
                 }
                 window.sessionStorage.setItem('userInfoObj',JSON.stringify(userInfoObj));
                 context.commit('setLoginStatus',true);

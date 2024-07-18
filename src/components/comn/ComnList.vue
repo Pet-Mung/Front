@@ -6,15 +6,15 @@
         <p>데이터가 없습니다.</p>
       </li>
     </ul>
-    <ul class="list_style mb-30">
+    <ul class="list_style">
    
       <li
         class="list_content"
-        v-for="(item, index) in props.list"
+        v-for="(item, index) in displayedPosts"
         :key="index"
         @click="clickProduct(item.id)"
       >
-        <img :src="item.thumbnail" :alt="item.name" class="pd-10" />
+        <img :src="imageCheck(item.thumbnail)" :alt="item.name" class="pd-10" />
         <div class="txt_wrap pd-10">
           <p class="mb-10">{{ item.animal_category }} {{ item.category }}</p>
           <p class="mb-10 fb fs-18">{{ item.name }}</p>
@@ -32,19 +32,39 @@
       </li>
     </ul>
   </div>
+  <PagingView
+    :currentPage="currentPage"
+    :totalPages="totalPages"
+    :isEmpty="isEmpty"
+    @changePage="changePage"
+  />
 </template>
 
 <script setup>
-import { getItemWithExpireTime } from "@/utils/common";
-import { computed, defineProps, } from "vue";
+import { getItemWithExpireTime, commonNumber, imageCheck} from "@/utils/common";
+import PagingView from "@/components/comn/ComnPaging.vue";
+import { computed, defineProps, ref, } from "vue";
 import { useRouter } from "vue-router";
-import { commonNumber } from "@/utils/common";
-import { useStore } from "vuex";
-
+import { useStore, } from "vuex";
 const store = useStore();
 const router = useRouter();
 const props = defineProps({
   list: { type: Array },
+});
+let currentPage = ref(1); //현재 페이지 번호
+let postsperPage = 10; //한 페이지에 보여줄 게시글 갯수
+let isEmpty = ref(false); //데이터 빈 값 여부
+const totalPages = computed(() => {
+  //총 페이지 수
+  return Math.ceil(props.list.length / postsperPage);
+});
+
+// 현재 페이지에 해당하는 게시글 목록을 반환
+const displayedPosts = computed(() => {
+  const startIndex = (currentPage.value - 1) * postsperPage;
+  const endIndex = startIndex + postsperPage;
+  if (!props.list) return [];
+  else return props.list.slice(startIndex, endIndex);
 });
 const isLogin = computed(() => {
   const userId = getItemWithExpireTime("userInfoObj")?.userId;
@@ -107,6 +127,12 @@ const clickProduct = (id) => {
   router.push(`/shop/products/detail/${id}`);
 };
 
+//페이지 변경
+const changePage = (str) => {
+  if (str == "prev") currentPage.value--;
+  else if (str == "next") currentPage.value++;
+  else currentPage.value = str;
+};
 // created
 if(user_idx.value) getBasket();
 
