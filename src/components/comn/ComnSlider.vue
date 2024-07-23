@@ -3,9 +3,13 @@
     <Carousel v-bind="setting" :breakpoints="breakpoints">
       <Slide class="" v-for="slide in props.sliderData" :key="slide">
         <div class="carousel__item">
-          <img :src="imageCheck(slide.image)" :alt="slide.name" class="slide_img" />
-          <p>{{ slide.name }}</p>
-          <p>{{ slide.count }}</p>
+          <img
+            :src="imageCheck(slide.image || slide.product_image)"
+            :alt="slide.name"
+            class="slide_img"
+          />
+          <p>{{ slide.name || slide.product_name}}</p>
+          <p class="fs-15 mt-10">{{ slide.count }} 개</p>
         </div>
       </Slide>
       <template #addons>
@@ -24,7 +28,11 @@
       <!-- -->
       <Slide class="" v-for="(slide, idx) in props.sliderData" :key="slide">
         <div class="carousel__item">
-          <img :src="imageCheck(slide)" :alt="`상품사진 ${idx}`" class="slide_img" />
+          <img
+            :src="imageCheck(slide)"
+            :alt="`상품사진 ${idx}`"
+            class="slide_img"
+          />
         </div>
       </Slide>
       <template #addons>
@@ -33,11 +41,36 @@
       </template>
     </Carousel>
   </div>
+
+  <div v-if="props.flag == 3">
+    <!-- :style="customStyle(slide.backgroundImage)" style -->
+    <Carousel
+      v-bind="settings"
+      :wrapAround=true
+      :mouseDrag=true
+      :touchDrag=true
+    >
+      <Slide class="" v-for="(slide, idx) in props.sliderData" :key="idx">
+        <div class="carousel__item">
+          <img
+            :src="slide.backgroundImage"
+            :alt="slide.title"
+            class="slide_img"
+          />
+          <p>{{ slide.title }}</p>
+          <p>{{ slide.content }}</p>
+        </div>
+      </Slide>
+      <template #addons>
+        <Navigation v-if="props.sliderData.length > 1" />
+      </template>
+    </Carousel>
+  </div>
 </template>
 
 <script setup>
 import { imageCheck } from "@/utils/common";
-import { computed, defineProps, } from "vue";
+import { computed, defineProps } from "vue";
 import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 
 import "vue3-carousel/dist/carousel.css";
@@ -49,7 +82,10 @@ const props = defineProps({
 const lenChk = computed(() => {
   return props.sliderData.length > 1 ? true : false;
 });
-
+// const customStyle = (bg) =>{
+//   return {'--bg' : bg};
+// }
+console.log(props.sliderData);
 //mypage slide setting
 const setting = {
   itemsToShow: 3,
@@ -79,3 +115,9 @@ const breakpoints = {
   },
 };
 </script>
+
+<style>
+/* .carousel__item{
+  background : var(--bg);
+} */
+</style>

@@ -3,7 +3,7 @@ import ShopView from "@/views/ShopView.vue";
 import UserView from "@/views/UserView.vue";
 
 // components
-import MainView from "@/components/MainView.vue";
+import MainView from "@/components/TheMain.vue";
 
 // public
 import LoginView from "@/components/user/UserLogin.vue";
@@ -27,6 +27,9 @@ import ManageProducts from "@/components/manage/ManageProducts.vue";
 import ManageUsers from "@/components/manage/ManageUsers.vue";
 import ProductItem from "@/components/manage/sub/ProductItem.vue";
 
+//comn
+import ComnNotFound from "@/components/comn/ComnNotFound.vue";
+
 //icon
 import iconView from "@/components/public/TheIcon.vue";
 const routes = [
@@ -46,7 +49,7 @@ const routes = [
     component: LoginView,
     props: true,
   },
-  // 로그인 페이지
+  // 회원가입 페이지
   {
     path: "/join",
     name: "JoinView",
@@ -68,7 +71,7 @@ const routes = [
       },
     ],
   },
-  //상품 페이지
+  //유저 페이지
   {
     path: "/user",
     component: UserView,
@@ -103,13 +106,14 @@ const routes = [
       },
     ],
   },
+  // icon 저작권 페이지
   {
     path: "/icons",
     name: "iconView",
     component: iconView,
     props: true,
   },
-  { path: "/:pathMatch(.*)*", redirect: "/main" },
+  { path: "/:pathMatch(.*)*", component : ComnNotFound },
 ];
 
 export default routes;
