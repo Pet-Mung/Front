@@ -2,7 +2,7 @@
   <div class="mypage_wrap">
     <div class="pd-30 lect_type_01">
       <div class="cont_area">
-        <h2 class="fs-40 mb-30 fc-w">My Page</h2>
+        <h2 class="fs-40 mb-30 fc-w">마이 페이지</h2>
         <div class="profile">
           <img src="@/assets/img/profile_icon.png" alt="프로필 아이콘" />
           <h3 class="fc-w ml-5 mr-15 pd-10 fs-30">
@@ -24,7 +24,7 @@
           <h4 class="fs-18 mlr-10">장바구니</h4>
           <button @click="router.push('basket')" class="fb">더 보기 +</button>
         </div>
-        <SliderView :flag="flag" :sliderData="basketData" />
+        <SliderView :flag="flag" :sliderData="basketInfo" />
       </div>
     </div>
     <div class="pd-30 lect_type_02">
@@ -93,35 +93,7 @@ let store =useStore();
 let router = useRouter();
 let data = ref({});
 // slider type
-let flag = 1
-// let clickTab = ref(1);
-// let constructor = (id,user_id,product_id,count,)=>{
-//   this.
-// }
-let basketData = [
-  {
-    id: 1,
-    user_id: 5,
-    product_id: 1,
-    count: 1,
-    purchase_chk: true,
-    created_at: "2024-07-09T13:21:56",
-    updated_at: null,
-    name: "aaaa",
-    image: require("@/assets/img/default.png"),
-  },
-  {
-    id: 2,
-    user_id: 5,
-    product_id: 1,
-    count: 1,
-    purchase_chk: true,
-    created_at: "2024-07-09T13:22:24",
-    updated_at: null,
-    name: "aaaa",
-    image: require("@/assets/img/default.png"),
-  },
-];
+let flag = 1;
 let purchaseData = [
   {
     id: 1,
@@ -146,6 +118,10 @@ let purchaseData = [
     image: require("@/assets/img/default.png"),
   },
 ];
+const basketInfo = computed(()=>{
+    return store.state.user.basketInfo;
+})
+
 // const imgAdd = (image) => {
 //   this.imgSrc = require(image);
 // }
@@ -156,12 +132,16 @@ const user_idx = computed(() => {
 const getUserInfo = async () => {
   try {
     const result = await api.getOnlyUser(user_idx.value);
-    // console.log(user_idx.value);
     data.value = result.data[0];
   } catch (error) {
     console.error(error);
   }
 };
+const getBasketView = async () => {
+  await store.dispatch("user/getBasket");
+};
+
+
 const deleteUserInfo = () => {
   if (confirm("정말 삭제하시겠습니까?") ==true){
     store.dispatch('user/delUserInfo',user_idx.value);
@@ -173,5 +153,7 @@ const deleteUserInfo = () => {
 
 onBeforeMount(() => {
   getUserInfo();
+  getBasketView();
+  console.log(basketInfo);
 });
 </script>

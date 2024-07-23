@@ -26,13 +26,13 @@
       </li>
     </ul>
   </div>
-  <ListView :list="products" />
+  <ComnList :list="products" :tabChange="animalTab" />
 </template>
 
 <script setup>
 import productApi from "@/api/productApi";
 import { computed, onMounted, onUpdated, ref } from "vue";
-import ListView from "@/components/comn/ComnList.vue";
+import ComnList from "@/components/comn/ComnList.vue";
 import { useStore } from "vuex";
 import { sortData } from "@/utils/common.js";
 import { useRoute, useRouter } from "vue-router";

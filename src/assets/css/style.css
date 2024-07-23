@@ -71,6 +71,12 @@ hr {
 i {
   font-style: normal;
 }
+.pr{
+  position: relative;
+}
+.pa{
+  position: absolute;
+}
 /* main */
 .ff_01 {
   font-family: var(--bs-body-font-family);
@@ -211,7 +217,7 @@ select:focus {
   transition: all 0.5s ease;
 }
 
-input {
+input:not([type="checkbox"]){
   appearance: none;
   -webkit-appearance: none;
   border-radius: 0;
@@ -504,8 +510,8 @@ input[type="radio"]:disabled + label {
   min-height: 150px;
   padding: 10px;
   width: 100%;
-  background-color: #e7e5e5;
-  color: var(--vc-clr-white);
+  background-color: #fff;
+  color: #000;
   font-size: 20px;
   border-radius: 8px;
   display: flex;

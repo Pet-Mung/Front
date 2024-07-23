@@ -26,7 +26,7 @@ export default {
   },
   actions: {
     // 장바구니 조회 api 호출
-    async getBasketView(context) {
+    async getBasket(context) {
       try {
         const result = await purchaseApi.viewCart();
         context.commit("setBasketInfo", result);
@@ -50,6 +50,7 @@ export default {
     // 장바구니 삭제 api 호출
     async delBasket(context, basketId) {
       try {
+        console.log(basketId);
         const result = await purchaseApi.deleteCart(basketId);
         if (result.status == "404") {
           alert(result.detail);
