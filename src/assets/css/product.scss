@@ -1,20 +1,20 @@
 @import "./mixin";
 // listView
-.table-bordered .no_data_table{
+.table-bordered .no_data_table {
   font-weight: 700;
-  padding:100px 0;
-  img{
+  padding: 100px 0;
+  img {
     width: 100px;
   }
 }
-.no_data{
+.no_data {
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   height: 30vh;
-  
-  img{
+
+  img {
     width: 50px;
   }
 }
@@ -29,9 +29,14 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-     border: 1px solid #ebe6de;
-     background-color: #fff;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #ebe6de;
+    background-color: #fff;
     border-radius: 8px;
+    &:hover{
+      scale:1.05;
+      transform: translateY(-10px);
+    }
     img {
       width: 100%;
       height: auto;
@@ -39,10 +44,14 @@
       aspect-ratio: 1;
       background-color: #fff;
       border-radius: 8px 8px 0 0;
+      cursor: pointer;
     }
     .txt_wrap {
       width: 100%;
       border-top: 1px solid #e1e1e1;
+      .txt_cursor{
+        cursor: pointer;
+      }
       .btn-cart {
         display: flex;
         align-items: center;
@@ -58,11 +67,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
       }
     }
   }
 }
-
 
 // manamgeProducts
 
@@ -128,8 +137,8 @@ form.product-form {
   width: 1000px;
   display: flex;
   justify-content: flex-end;
-  .confirm_btn{
-    width : 100px;
+  .confirm_btn {
+    width: 100px;
     height: 50px;
   }
 }
@@ -139,18 +148,18 @@ form.product-form {
   width: 100%;
   max-width: 500px;
   flex-direction: column;
-  padding :20px 0 20px 20px;
+  padding: 20px 0 20px 20px;
   .btn_wrap {
     display: flex;
     align-items: center;
     button {
       width: 100%;
       background-color: #000;
-      color: #fff;;
+      color: #fff;
       margin: 20px 0px;
       padding: 10px 20px;
       border-radius: 10px;
-      &:first-child{
+      &:first-child {
         margin-right: 5px;
       }
     }
@@ -201,11 +210,10 @@ form.product-form {
     }
   }
 }
-.detail_info_wrap{
+.detail_info_wrap {
   padding: 40px 20px;
   word-break: break-word;
 }
-
 
 // 태블릿에서 노트북
 @include desktopToTablet {
@@ -213,7 +221,6 @@ form.product-form {
     grid-template-columns: repeat(5, 1fr); /* 5열 그리드 */
   }
 }
-
 
 // 태블릿
 @include tablet {
@@ -223,8 +230,8 @@ form.product-form {
 }
 
 //minwidth 1200px
-@include nav_pc{
-  .shop_wrap .tab_cat_06{
+@include nav_pc {
+  .shop_wrap .tab_cat_06 {
     display: none;
   }
 }

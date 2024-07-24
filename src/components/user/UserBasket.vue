@@ -55,13 +55,19 @@
             </div>
           </td>
           <td>
-            <button type="button" class="del_btn" @click="delBasketView(item.id)">삭제</button>
+            <button
+              type="button"
+              class="del_btn"
+              @click="delBasketView(item.id)"
+            >
+              삭제
+            </button>
           </td>
           <td>
             <input
               class="cart_chkBox"
               type="checkbox"
-              :value="item.id"
+              :value="`${item.id} ${item.price}`"
               v-model="selectList"
             />
           </td>
@@ -74,13 +80,13 @@
         >개의 상품금액 =
         <strong>{{ commonNumber(resultInfo.allPrice) }}</strong> 원
         <span>+</span> 배송비
-        <strong>{{ commonNumber(resultInfo.delivery) }}</strong
-        > 원 <span>=</span> 합계
+        <strong>{{ commonNumber(resultInfo.delivery) }}</strong> 원
+        <span>=</span> 합계
         <strong>{{
           commonNumber(resultInfo.allPrice + resultInfo.delivery)
-        }}</strong> 원
+        }}</strong>
+        원
       </p>
-
     </div>
     <div class="btn-area">
       <button type="button" @click="router.push('/shop/products')">
@@ -99,10 +105,12 @@ import { useStore } from "vuex";
 
 const store = useStore();
 const router = useRouter();
+
 const basketInfo = computed(() => {
   return store.state.user.basketInfo;
 });
 let selectList = ref([]);
+// let selectListPrice = ref([]);
 let allCheckList = ref([]);
 let allSelectList = computed({
   get() {
@@ -113,16 +121,23 @@ let allSelectList = computed({
   },
 });
 let resultInfo = reactive({
-  allPrice: 3000,
+  allPrice: 0,
   delivery: 3000,
 });
+// 장바구니 목록 조회 api 호출
 const getBasketView = async () => {
   await store.dispatch("user/getBasket");
   basketInfo.value.forEach((el) => {
     el.price = 1000;
-    allCheckList.value.push(el.id);
+    allCheckList.value.push(`${el.id} ${el.price}`);
   });
 };
+// 장바구니 수정 api 호출
+// const putBasketView = async (info) => {
+//   getBasketView();
+// };
+
+// 장바구니 삭제 api 호출
 const delBasketView = async (id) => {
   await store.dispatch("user/delBasket", id);
   getBasketView();
@@ -130,9 +145,15 @@ const delBasketView = async (id) => {
 
 // created
 getBasketView();
-watch(selectList,()=>{
-  console.log(selectList.value);
-})
+watch(selectList, () => {
+  let price = 0;
+  selectList.value.forEach((el) => {
+    price += Number(el.split(" ")[1]);
+    // * Number(el.split(" ")[2]);
+  });
+  resultInfo.allPrice = price;
+  if(resultInfo.allPrice >= 50000 ) resultInfo.delivery = 0;
+});
 </script>
 
 <style lang="scss" scoped>
@@ -156,7 +177,7 @@ watch(selectList,()=>{
           img {
             width: 100px;
           }
-          .del_btn{
+          .del_btn {
             border: 1px solid #a5a3a3;
             padding: 5px 10px;
             background-color: #ececec;
@@ -176,16 +197,16 @@ watch(selectList,()=>{
       }
     }
   }
-  .result_area{
+  .result_area {
     width: 100%;
     background-color: #e2e2e2;
-    padding:20px;
+    padding: 20px;
     margin: 20px 0;
     border-radius: 20px;
-    p{
+    p {
       text-align: right;
     }
-    span{
+    span {
       display: inline-flex;
       background-color: #9a9b9c;
       width: 30px;
@@ -194,20 +215,20 @@ watch(selectList,()=>{
       justify-content: center;
       border-radius: 50%;
       font-weight: 700;
-      color:#fff;
+      color: #fff;
     }
   }
-  .btn-area{
+  .btn-area {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    button{
+    button {
       width: 45%;
       background-color: #505cff;
-      &:first-child{
+      &:first-child {
         background-color: #fff;
-        color:#505cff;
-        border:1px solid #505cff;
+        color: #505cff;
+        border: 1px solid #505cff;
       }
     }
   }

@@ -1,6 +1,10 @@
 <template>
   <!-- <div>메인 페이지입니다.</div> -->
   <div class="main-wrapper">
+    <section class="intro">
+      <div class="intro_01"></div>
+      <div class="intro_02"></div>
+    </section>
     <section class="main-banner">
       <SliderView :flag="flag" :sliderData="bannerData" />
       <!-- <div class="flex">
@@ -11,155 +15,6 @@
         <img src="@/assets/img/nemo_cat.jpg" alt="" />
       </div> -->
     </section>
-    <section class="new">
-      <h4>이 물품은 어떠세요?</h4>
-      <ul class="pdt-list">
-        <li class="pdt-list-con">
-          <a href="">
-            <img src="@/assets/img/love_cat.jpg" alt="" />
-          </a>
-          <div class="txt-wrap">
-            <p class="pdt-name">
-              <a href="">츄르</a>
-            </p>
-            <div class="pdt-price">
-              <a href="">
-                <p class="price">30,000<span>원</span></p>
-              </a>
-            </div>
-            <button type="button" class="btn-cart">
-              <span class="hide">장바구니 담기/삭제</span>
-            </button>
-          </div>
-        </li>
-        <li class="pdt-list-con">
-          <a href="">
-            <img src="@/assets/img/love_cat.jpg" alt="" />
-          </a>
-          <div class="txt-wrap">
-            <p class="pdt-name">
-              <a href="">츄르</a>
-            </p>
-            <div class="pdt-price">
-              <a href="">
-                <p class="price">30,000<span>원</span></p>
-              </a>
-            </div>
-            <button type="button" class="btn-cart">
-              <span class="hide">장바구니 담기/삭제</span>
-            </button>
-          </div>
-        </li>
-        <li class="pdt-list-con">
-          <a href="">
-            <img src="@/assets/img/love_cat.jpg" alt="" />
-          </a>
-          <div class="txt-wrap">
-            <p class="pdt-name">
-              <a href="">츄르</a>
-            </p>
-            <div class="pdt-price">
-              <a href="">
-                <p class="price">30,000<span>원</span></p>
-              </a>
-            </div>
-            <button type="button" class="btn-cart">
-              <span class="hide">장바구니 담기/삭제</span>
-            </button>
-          </div>
-        </li>
-        <li class="pdt-list-con">
-          <a href="">
-            <img src="@/assets/img/love_cat.jpg" alt="" />
-          </a>
-          <div class="txt-wrap">
-            <p class="pdt-name">
-              <a href="">츄르</a>
-            </p>
-            <div class="pdt-price">
-              <a href="">
-                <p class="price">30,000<span>원</span></p>
-              </a>
-            </div>
-            <button type="button" class="btn-cart">
-              <span class="hide">장바구니 담기/삭제</span>
-            </button>
-          </div>
-        </li>
-        <li class="pdt-list-con">
-          <a href="">
-            <img src="@/assets/img/love_cat.jpg" alt="" />
-          </a>
-          <div class="txt-wrap">
-            <p class="pdt-name">
-              <a href="">츄르</a>
-            </p>
-            <div class="pdt-price">
-              <a href="">
-                <p class="price">30,000<span>원</span></p>
-              </a>
-            </div>
-            <button type="button" class="btn-cart">
-              <span class="hide">장바구니 담기/삭제</span>
-            </button>
-          </div>
-        </li>
-        <li class="pdt-list-con">
-          <a href="">
-            <img src="@/assets/img/love_cat.jpg" alt="" />
-          </a>
-          <div class="txt-wrap">
-            <p class="pdt-name">
-              <a href="">츄르</a>
-            </p>
-            <div class="pdt-price">
-              <a href="">
-                <p class="price">30,000<span>원</span></p>
-              </a>
-            </div>
-            <button type="button" class="btn-cart">
-              <span class="hide">장바구니 담기/삭제</span>
-            </button>
-          </div>
-        </li>
-        <li class="pdt-list-con">
-          <a href="">
-            <img src="@/assets/img/love_cat.jpg" alt="" />
-          </a>
-          <div class="txt-wrap">
-            <p class="pdt-name">
-              <a href="">츄르</a>
-            </p>
-            <div class="pdt-price">
-              <a href="">
-                <p class="price">30,000<span>원</span></p>
-              </a>
-            </div>
-            <button type="button" class="btn-cart">
-              <span class="hide">장바구니 담기/삭제</span>
-            </button>
-          </div>
-        </li>
-        <li class="pdt-list-con">
-          <a href="">
-            <img src="@/assets/img/love_cat.jpg" alt="" />
-          </a>
-          <div class="txt-wrap">
-            <p class="pdt-name">
-              <a href="">츄르</a>
-            </p>
-            <div class="pdt-price">
-              <a href="">
-                <p class="price">30,000<span>원</span></p>
-              </a>
-            </div>
-            <button type="button" class="btn-cart">
-              <span class="hide">장바구니 담기/삭제</span>
-            </button>
-          </div>
-        </li>
-      </ul>
-    </section>
   </div>
 </template>
 
@@ -169,34 +24,52 @@ let flag = 3;
 
 let bannerData = [
   {
-    title : '고양이용 참치 통조림',
-    backgroundImage : require('@/assets/img/banner_01.jpg'),
-    content : '클레오티드가 먼저 수용체를 활성화하고 아미노산이 이를 강화시켰다. 또 고양이는 다른 음식의 감칠맛보다 참치가 지닌 감칠맛에 더 강하게 반응했다.',
-    
+    title: "고양이용 참치 통조림",
+    backgroundImage: require("@/assets/img/banner_01.jpg"),
+    content:
+      "클레오티드가 먼저 수용체를 활성화하고 아미노산이 이를 강화시켰다. 또 고양이는 다른 음식의 감칠맛보다 참치가 지닌 감칠맛에 더 강하게 반응했다.",
   },
   {
-    title : 'cat Bed',
-    backgroundImage : require('@/assets/img/banner_02.jpg'),
-    content : 'Stylish & Unique Homeware. \n 8 stylish pet buys for the home',
-    
-  }
-]
+    title: "cat Bed",
+    backgroundImage: require("@/assets/img/banner_02.jpg"),
+    content: "Stylish & Unique Homeware. \n 8 stylish pet buys for the home",
+  },
+];
 </script>
 
 <style lang="scss" scoped>
-.main-wrapper {
-  margin-bottom: 200px;
-}
-.hide {
-  display: none;
-}
-.flex {
-  display: flex;
+/* mainpage */
+
+.intro {
+  /* display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden; */
+  /* width: 100%;
+  height: 100vh;
+  margin-top: 200px; */
 }
-section {
-  margin-bottom: 70px;
+.intro_01 {
+  /* width :  1200px;
+  height : 500px;
+  background-color: rgb(219, 219, 218);
+  transform: rotate(45deg); */
 }
+.intro_02 {
+  width: 100%;
+  --section-gap: calc(24px);
+  --gradient-padding: 30px;
+  /* --gradient-title-margin: 100px; */
+  --section-angle-sin: 0.212;
+  --section-skew-Y: -5deg;
+  --transform-origin-x: calc(var(--section-gap) * 0.8);
+  will-change: auto;
+  transform-origin: var(--transform-origin-x);
+  transform: skewY(var(--section-skew-Y));
+  background-color: #3d3d3d;
+}
+
 .main-banner {
   // background-image: url("@/assets/img/cat.jpg");
   // background-repeat: no-repeat;
@@ -220,56 +93,6 @@ section {
     }
     span {
       font-size: 16px;
-    }
-  }
-}
-
-.new {
-  max-width: 1200px;
-  width: 90%;
-  margin: 0 auto;
-  h4 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  .pdt-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4열 그리드 */
-    gap: 20px;
-    width: 100%;
-
-    .pdt-list-con {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-
-      img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      .txt-wrap {
-        margin-top: 10px;
-        position: relative;
-        width: 100%;
-
-        .pdt-name {
-          margin-bottom: 4px;
-        }
-
-        .btn-cart {
-          position: absolute;
-          right: 9px;
-          bottom: -1px;
-          z-index: 5;
-          width: 20px;
-          height: 20px;
-          background: url(@/assets/img/cart.png) no-repeat center top;
-          background-size: cover;
-        }
-      }
     }
   }
 }

@@ -11,24 +11,36 @@
         class="list_content pr"
         v-for="(item, index) in displayedPosts"
         :key="index"
-        @click.self="clickProduct(item.id)"
       >
         <img
           :src="imageCheck(item.thumbnail)"
           :alt="item.name"
           class="pd-10"
+          @click="clickProduct(item.id)"
         />
         <div class="txt_wrap pd-10">
-          <p class="mb-10">{{ item.animal_category }} {{ item.category }}</p>
-          <p class="mb-10 fb fs-18">{{ item.name}}</p>
+          <div @click="clickProduct(item.id)" class="txt_cursor">
+            <p class="mb-10">{{ item.animal_category }} {{ item.category }}</p>
+            <p class="mb-10 fb fs-18">{{ item.name }}</p>
+          </div>
           <div class="txt_flex">
             <p>{{ commonNumber(item.price) }}<span>원</span></p>
             <div v-if="isLogin">
-              <button type="button" class="btn-cart bx-shadow">
-                <span v-if="item.isCart" @click.stop="delCartBtn(item)"
-                  >Delete CART</span
-                >
-                <span v-else @click.stop="addCartBtn(item)">ADD CART +</span>
+              <button
+                type="button"
+                class="btn-cart bx-shadow"
+                v-if="item.isCart"
+                @click.stop="delCartBtn(item)"
+              >
+                <span>Delete CART</span>
+              </button>
+              <button
+                type="button"
+                class="btn-cart bx-shadow"
+                v-else
+                @click.capture="addCartBtn(item)"
+              >
+                <span>ADD CART +</span>
               </button>
             </div>
           </div>
@@ -158,9 +170,7 @@ const changePage = (str) => {
 
 if (user_idx.value) getBasketView();
 
-
 watch(animalTab, () => {
   changePage(1);
 });
-
 </script>
