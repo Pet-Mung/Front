@@ -24,15 +24,16 @@ let flag = 3;
 
 let bannerData = [
   {
-    title: "고양이용 참치 통조림",
-    backgroundImage: require("@/assets/img/banner_01.jpg"),
-    content:
-      "클레오티드가 먼저 수용체를 활성화하고 아미노산이 이를 강화시켰다. 또 고양이는 다른 음식의 감칠맛보다 참치가 지닌 감칠맛에 더 강하게 반응했다.",
+    backgroundImage: require("@/assets/img/banner/banner01.jpg"),
+    color:"#dfffcc",
   },
   {
-    title: "cat Bed",
-    backgroundImage: require("@/assets/img/banner_02.jpg"),
-    content: "Stylish & Unique Homeware. \n 8 stylish pet buys for the home",
+    backgroundImage: require("@/assets/img/banner/banner02.jpg"),
+    color:"#fa93be",
+  },
+  {
+    backgroundImage: require("@/assets/img/banner/banner03.jpg"),
+    color:"#f693fa",
   },
 ];
 </script>
@@ -75,7 +76,7 @@ let bannerData = [
   // background-repeat: no-repeat;
   // background-position: center;
   // background-size: cover;
-  background-color: bisque;
+  /* background-color: bisque; */
   height: 300px;
   .flex {
     height: 100%;

@@ -321,7 +321,7 @@ input[type="radio"]:disabled + label {
 
 /* main */
 .main_wrap {
-  padding-top: 200px;
+  padding-top: 120px;
   width: 90%;
   max-width: 1200px;
   height: 100%;
@@ -519,7 +519,13 @@ input[type="radio"]:disabled + label {
   justify-content: center;
   align-items: center;
 }
-
+.carousel__item.banner__item{
+  border-radius: 0;
+  padding: 0;
+}
+.carousel__item.banner__item .slide_img{
+  width: auto
+}
 .carousel__slide {
   padding: 10px;
 }

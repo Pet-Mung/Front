@@ -50,15 +50,15 @@
       :mouseDrag=true
       :touchDrag=true
     >
-      <Slide class="" v-for="(slide, idx) in props.sliderData" :key="idx">
-        <div class="carousel__item">
+      <Slide class="" v-for="(slide, idx) in props.sliderData" :key="idx" :style="{padding : 0}">
+        <div class="carousel__item banner__item"  :style="{ backgroundColor: slide.color }">
           <img
             :src="slide.backgroundImage"
-            :alt="slide.title"
+            :alt="idx"
             class="slide_img"
           />
-          <p>{{ slide.title }}</p>
-          <p>{{ slide.content }}</p>
+          <!-- <p>{{ slide.title }}</p> -->
+          <!-- <p>{{ slide.content }}</p> -->
         </div>
       </Slide>
       <template #addons>
@@ -95,7 +95,7 @@ const setting = {
 const settings = {
   itemsToShow: 1,
   snapAlign: "center",
-  autoplay: 5000,
+  // autoplay: 5000,
 };
 const breakpoints = {
   // 500px and up

@@ -24,7 +24,7 @@
             <dt>전화번호 :</dt>
             <dd>010 - 9954 - 8079</dd>
           </dl>
-          <small>Copyrights ⓒ PET MUNG</small>
+          <small>Copyrights ⓒ CATTUS</small>
         </li>
         <li>
           <ul class="each-list">

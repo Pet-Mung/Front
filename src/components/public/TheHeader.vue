@@ -1,8 +1,10 @@
 <template>
   <div class="header_wrap">
     <div class="logo_area" @click="router.push('/main')">
-      <img src="@/assets/img/logo.png" alt="logo" />
-      <h1>pet mall</h1>
+      <h1>CATTUS
+        <img src="@/assets/img/logo.png" alt="logo" />
+        </h1>
+      
     </div>
     <NavBar />
   </div>
